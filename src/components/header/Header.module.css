@@ -1,0 +1,57 @@
+.cart {
+  height: 43px;
+  width: 50px;
+  padding-right: 35px;
+  padding-left: 25px;
+  float: right;
+  margin: auto;
+}
+
+.circle {
+  padding: 6px;
+  padding-top: 4px;
+  width: 30px;
+  height: 31px;
+  background: #d2691e;
+  border-radius: 50%;
+  float: right;
+  margin-right: 5px;
+}
+
+.googlebutton {
+  float: right;
+  vertical-align: auto;
+  padding: 25px;
+  margin: auto;
+}
+
+.HeaderStyling {
+  background-color: rgb(30, 210, 105);
+  padding: 10px;
+  height: 48px;
+  width: 100%;
+  padding: 10px;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+}
+
+.productsButton{
+    height: 30px;
+    width: auto;
+    padding-bottom: 12px;
+}
+
+.logo {
+  height: 50px;
+  width: 50px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: auto;
+}
+
+.name {
+  float: right;
+  padding-right: 6px;
+  padding-top: 12px;
+}

@@ -36,3 +36,30 @@
     transform: rotate(360deg);
   }
 }
+
+.toast-test {
+  margin: 5px;
+  border-style: hidden;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.toast-buttons {
+  margin-top: 65px;
+}
+
+#info {
+  background-color: #3498db;
+}
+
+#success {
+  background-color: #07bc0c;
+}
+
+#warning {
+  background-color: #f1c40f;
+}
+
+#error {
+  background-color: #e74c3c;
+}

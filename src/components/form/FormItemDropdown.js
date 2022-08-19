@@ -7,31 +7,61 @@ import styles from './FormItem.module.css';
  * @return component
  */
 const FormItemDropdown = ({
-  onChange, value, id, label, options
-}) => (
-
-  <div>
-    <label className={styles.label} htmlFor={id}>
-      {label}
+  onChange, value, id, label, options, errorMessage, isError
+}) => {
+  if (isError) {
+    return (
       <div>
-        <select
-          className={styles.input}
-          id={id}
-          onBlur={onChange}
-          value={value}
-        >
-          {options.map((optionText) => (
-            <option
-              value={optionText}
-              key={optionText}
+        <label className={styles.label} htmlFor={id}>
+          {label}
+          <div>
+            <select
+              className={isError ? styles.errorOutline : styles.input}
+              id={id}
+              onBlur={onChange}
+              defaultValue={value}
+              value={value}
             >
-              {optionText}
-            </option>
-          ))}
-        </select>
+              {options.map((optionText) => (
+                <option
+                  value={optionText}
+                  key={optionText}
+                >
+                  {optionText}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className={styles.errorText}>{errorMessage}</div>
+        </label>
       </div>
-    </label>
-  </div>
-);
-
+    );
+  }
+  return (
+    <div>
+      <label className={styles.label} htmlFor={id}>
+        {label}
+        <div>
+          <select
+            className={styles.input}
+            id={id}
+            onBlur={onChange}
+            value={value}
+            defaultValue={value}
+          >
+            {options.map((optionText) => (
+              <option
+                value={optionText}
+                key={optionText}
+              >
+                {optionText}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className={styles.invisible}>{errorMessage}</div>
+      </label>
+    </div>
+  );
+};
 export default FormItemDropdown;

@@ -3,10 +3,48 @@
   width: 100%;
   padding: .5em;
   box-sizing: border-box;
+ 
 }
 
 .label {
   font-weight: 700;
   color: #666666;
   margin-bottom: .5em;
+  position: relative;
+}
+
+.errorText {
+  color: red;
+}
+
+.errorOutline {
+  margin-top: .5em;
+  width: 100%;
+  padding: .5em;
+  box-sizing: border-box;
+  outline: 1px solid red;
+}
+
+.invisible {
+  clear: both;
+  visibility: hidden;
+}
+
+.input-prefix {
+  padding-left: 1.5em;
+}
+
+.prefix {
+  color: #969696;
+  font-family: sans-serif;
+  font-size: .9em;
+  font-weight: lighter;
+  left: .5em;
+  position: absolute;
+  top: 58.5%;  
+  z-index: 0;
+}
+
+.prefix-error {
+  top: 43%;
 }
