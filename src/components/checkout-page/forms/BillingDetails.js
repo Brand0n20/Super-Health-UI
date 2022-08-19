@@ -8,7 +8,9 @@ import styles from './DeliveryAddress.module.css';
  * @description Allows entry of Billing Details
  * @return component
  */
-const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
+const BillingDetails = ({
+  onChange, billingData, useShippingForBilling, errorMessages
+}) => {
   const usStates = ['Alabama', 'Alaska', 'American Samoa', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'District of Columbia', 'Federated States of Micronesia', 'Florida', 'Georgia', 'Guam', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Marshall Islands', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Northern Mariana Islands', 'Ohio', 'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virgin Island', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
 
   return (
@@ -24,6 +26,8 @@ const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
             label="Street"
             onChange={onChange}
             value={billingData.billingStreet}
+            errorMessage={errorMessages.billingStreet}
+            isError={errorMessages.billingStreetIsError}
           />
 
           <FormItem
@@ -33,6 +37,8 @@ const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
             label="Street 2 (Optional)"
             onChange={onChange}
             value={billingData.billingStreet2}
+            errorMessage={errorMessages.billingStreet2}
+            isError={errorMessages.billingStreet2IsError}
           />
 
           <FormItem
@@ -41,6 +47,8 @@ const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
             label="City"
             onChange={onChange}
             value={billingData.billingCity}
+            errorMessage={errorMessages.billingCity}
+            isError={errorMessages.billingCityIsError}
           />
 
           <FormItemDropdown
@@ -49,6 +57,8 @@ const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
             onChange={onChange}
             value={billingData.billingState}
             options={usStates}
+            errorMessage={errorMessages.billingState}
+            isError={errorMessages.billingStateIsError}
           />
 
           <FormItem
@@ -58,6 +68,8 @@ const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
             label="Zip"
             onChange={onChange}
             value={billingData.billingZip}
+            errorMessage={errorMessages.billingZip}
+            isError={errorMessages.billingZipIsError}
           />
         </>
       )}
@@ -68,15 +80,19 @@ const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
         label="Email"
         onChange={onChange}
         value={billingData.email}
+        errorMessage={errorMessages.billingEmail}
+        isError={errorMessages.billingEmailIsError}
       />
 
       <FormItem
-        placeholder="e.g. 555-555-5555"
+        placeholder="e.g. 123-456-7890"
         type="text"
         id="phone"
         label="Phone"
         onChange={onChange}
         value={billingData.phone}
+        errorMessage={errorMessages.billingPhone}
+        isError={errorMessages.billingPhoneIsError}
       />
 
       <FormItem
@@ -86,6 +102,8 @@ const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
         label="Credit Card"
         onChange={onChange}
         value={billingData.creditCard}
+        errorMessage={errorMessages.cardNumber}
+        isError={errorMessages.cardNumberIsError}
       />
 
       <FormItem
@@ -95,6 +113,8 @@ const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
         label="CVV"
         onChange={onChange}
         value={billingData.cvv}
+        errorMessage={errorMessages.cvv}
+        isError={errorMessages.cvvIsError}
       />
 
       <FormItem
@@ -104,6 +124,8 @@ const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
         label="Expiration"
         onChange={onChange}
         value={billingData.expiration}
+        errorMessage={errorMessages.expiration}
+        isError={errorMessages.expirationIsError}
       />
 
       <FormItem
@@ -112,6 +134,8 @@ const BillingDetails = ({ onChange, billingData, useShippingForBilling }) => {
         label="Cardholder Name"
         onChange={onChange}
         value={billingData.cardholder}
+        errorMessage={errorMessages.cardholder}
+        isError={errorMessages.cardholderIsError}
       />
     </div>
 

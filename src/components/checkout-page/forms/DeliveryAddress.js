@@ -8,7 +8,9 @@ import styles from './DeliveryAddress.module.css';
  * @description Allows entry of delivery address
  * @return component
  */
-const DeliveryAddress = ({ onChange, deliveryData }) => {
+const DeliveryAddress = ({
+  onChange, deliveryData, errorMessages
+}) => {
   const usStates = ['Alabama', 'Alaska', 'American Samoa', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'District of Columbia', 'Federated States of Micronesia', 'Florida', 'Georgia', 'Guam', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Marshall Islands', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Northern Mariana Islands', 'Ohio', 'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virgin Island', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
 
   return (
@@ -19,7 +21,9 @@ const DeliveryAddress = ({ onChange, deliveryData }) => {
         id="firstName"
         label="First Name"
         onChange={onChange}
-        value={deliveryData.firstName}
+        value={deliveryData.deliveryFirstName}
+        errorMessage={errorMessages.deliveryFirstName}
+        isError={errorMessages.deliveryFirstNameIsError}
       />
 
       <FormItem
@@ -27,7 +31,9 @@ const DeliveryAddress = ({ onChange, deliveryData }) => {
         id="lastName"
         label="Last Name"
         onChange={onChange}
-        value={deliveryData.lastName}
+        value={deliveryData.deliveryLastName}
+        errorMessage={errorMessages.deliveryLastName}
+        isError={errorMessages.deliveryLastNameIsError}
       />
 
       <FormItem
@@ -37,6 +43,8 @@ const DeliveryAddress = ({ onChange, deliveryData }) => {
         label="Street"
         onChange={onChange}
         value={deliveryData.street}
+        errorMessage={errorMessages.deliveryStreet}
+        isError={errorMessages.deliveryStreetIsError}
       />
 
       <FormItem
@@ -46,6 +54,8 @@ const DeliveryAddress = ({ onChange, deliveryData }) => {
         label="Street 2 (Optional)"
         onChange={onChange}
         value={deliveryData.street2}
+        errorMessage={errorMessages.deliveryStreet2}
+        isError={errorMessages.deliveryStreet2IsError}
       />
 
       <FormItem
@@ -54,6 +64,8 @@ const DeliveryAddress = ({ onChange, deliveryData }) => {
         label="City"
         onChange={onChange}
         value={deliveryData.city}
+        errorMessage={errorMessages.deliveryCity}
+        isError={errorMessages.deliveryCityIsError}
       />
 
       <FormItemDropdown
@@ -62,6 +74,8 @@ const DeliveryAddress = ({ onChange, deliveryData }) => {
         onChange={onChange}
         value={deliveryData.state}
         options={usStates}
+        errorMessage={errorMessages.deliveryState}
+        isError={errorMessages.deliveryStateIsError}
       />
 
       <FormItem
@@ -71,6 +85,8 @@ const DeliveryAddress = ({ onChange, deliveryData }) => {
         label="Zip"
         onChange={onChange}
         value={deliveryData.zip}
+        errorMessage={errorMessages.deliveryZip}
+        isError={errorMessages.deliveryZipIsError}
       />
     </div>
 

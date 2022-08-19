@@ -13,8 +13,12 @@ const ReviewOrderWidget = () => {
   const {
     state: { products }
   } = useCart();
+  const emptyMsg = 'Your cart is empty! Please add products to your cart.';
   return (
     <>
+      <p className={styles.emptyMsg}>
+        {!products.length && emptyMsg}
+      </p>
       {products.map(({
         price, title, description, quantity
       }) => (

@@ -1,0 +1,61 @@
+.button {
+  font-size: 15px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  background: lightsalmon;
+  border-radius: 20px;
+  color:black;
+  border-color:antiquewhite;
+  font-weight: 400;
+  cursor: pointer;
+  height: 40px;
+  width: 35%;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.buttonBlock {
+  margin: 10px 20%;
+}
+
+.scrollable {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+}
+
+.Maintenance {
+  margin-top: 70px;
+}
+
+.rowColor:nth-child(even) {
+  background-color: rgb(98, 221, 98);
+}
+
+.rowColor:nth-child(odd) {
+  background-color: rgb(144,238,144);
+}
+
+
+.header {
+  vertical-align: middle;
+  background-color: rgb(30, 210, 105);
+  position: sticky;
+  top: 7.1%;
+}
+
+@media (max-width: 700px) {
+  table {
+    display: block;
+    max-width: -moz-fit-content;
+    overflow-x: auto;
+  }
+}
+
+td { 
+  min-width: 100px;
+  padding-left: 6px;
+  border: 1px solid white;
+ 
+}

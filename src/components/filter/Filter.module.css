@@ -1,0 +1,75 @@
+.btn {
+  background-color: rgb(30, 210, 105);
+  border: none;
+}
+
+
+.card {
+  display: block;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  width: 120px;
+}
+
+.dropdown {
+  background-color: rgb(25, 183, 91);
+  font-size: 0.8rem;
+  width: 120px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+.filterParagraphTextbox {
+  color: black;
+  font-weight: 400;
+  margin: 3px;
+  text-align: center;;
+}
+
+.filterCheckbox {
+  display: flexbox;
+  margin-left: 5px;
+  vertical-align: middle;
+}
+
+.filterParagraph {
+  color: black;
+  display: inline-block;
+  margin: 3px;
+  vertical-align: middle;
+}
+
+.filterParagraphTextbox {
+  color: black;
+  display: block;
+  font-weight: 400;
+  text-align: center;
+}
+
+.filterDiv {
+  background-color: rgb(30, 210, 105);
+  display: flex;
+  justify-content: center;
+  width: 120px;
+}
+
+.filterInput {
+  border-style: inset;
+  border-color: rgb(30, 210, 105);
+  justify-content: center;
+  text-align: left;
+  width: 100px;
+}
+
+.title {
+  color: black;
+  font-size: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  justify-content: center;
+}
+
+.svg_icons {
+  transform: scale(0.6);
+  
+}

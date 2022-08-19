@@ -23,10 +23,17 @@ describe('getSubtotal', () => {
       },
       {
         quantity: 1,
-        price: 3.50
+        price: 3.5
       }
     ];
     const expected = '$23.48';
+
+    expect(getSubtotal(products)).toEqual(expected);
+  });
+
+  it('returns price for empty product array', () => {
+    const products = [];
+    const expected = '$0.00';
 
     expect(getSubtotal(products)).toEqual(expected);
   });

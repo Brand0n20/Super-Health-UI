@@ -1,3 +1,7 @@
+.emptyMsg {
+  text-align: center;
+}
+
 .subtotal {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -6,3 +10,4 @@
 .price {
   justify-self: end;
 }
+
