@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { React, useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -9,12 +10,17 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
+import { Link } from 'react-router-dom';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import ShareIcon from '@material-ui/icons/Share';
+import StarIcon from '@material-ui/icons/Star';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import styles from './ProductCard.module.css';
 import Constants from '../../utils/constants';
 import { useCart } from '../checkout-page/CartContext';
+import { fetchRatingAverageByProductId } from '../product-page/ReviewService';
+import customToast from '../customizable-toast/customToast';
 
 /**
  * @name useStyles
@@ -52,10 +58,11 @@ const useStyles = makeStyles((theme) => ({
  */
 const ProductCard = ({ product }) => {
   const classes = useStyles();
-
+  const [ratingAverage, setRatingAverage] = useState(null);
+  const [apiError, setApiError] = useState();
   const { dispatch } = useCart();
-
   const onAdd = () => {
+    customToast('Added product to cart!', 'success');
     dispatch(
       {
         type: 'add',
@@ -69,6 +76,10 @@ const ProductCard = ({ product }) => {
       }
     );
   };
+
+  useEffect(() => {
+    fetchRatingAverageByProductId(product.id, setRatingAverage, setApiError);
+  }, []);
 
   return (
     <Card className={classes.root}>
@@ -108,9 +119,17 @@ const ProductCard = ({ product }) => {
         <IconButton aria-label="share">
           <ShareIcon />
         </IconButton>
-        <IconButton aria-label="add to shopping cart" onClick={onAdd}>
+        <IconButton aria-label="add to shopping cart" data-testid="addToCart" onClick={onAdd}>
           <AddShoppingCartIcon />
         </IconButton>
+        {!apiError && ratingAverage !== null && (
+        <Link to={`/products/${product.id}`} className={styles.link}>
+          <IconButton className={styles['review-button']}>
+            <StarIcon />
+            <span className={styles['review-number']}>{ratingAverage}</span>
+          </IconButton>
+        </Link>
+        )}
       </CardActions>
     </Card>
   );

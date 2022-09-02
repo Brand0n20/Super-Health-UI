@@ -24,7 +24,7 @@ describe('CreationPage Component Tests', () => {
   it('shows success msg toast when a product is created', async () => {
     const user = userEvent.setup();
 
-    postProducts.mockImplementation(({}, setApiError, history) => {});
+    postProducts.mockImplementation(({ }, setApiError, history) => { });
     render(<CreationPage />, container);
     const messageContent = 'Product successfully created! Now redirecting to maintenance page.';
     await user.click(screen.getByTestId('addButton'));
@@ -33,7 +33,7 @@ describe('CreationPage Component Tests', () => {
 
   it('shows error msg toast when a product can not be created', async () => {
     const user = userEvent.setup();
-    postProducts.mockImplementation(({}, setApiError, history) => {
+    postProducts.mockImplementation(({ }, setApiError, history) => {
       setApiError(true);
     });
     render(<CreationPage />, container);

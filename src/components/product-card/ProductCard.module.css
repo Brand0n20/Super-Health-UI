@@ -1,0 +1,16 @@
+.root {
+  max-width: em;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.review-button > span span {
+  margin-left: .15em;
+  margin-top: .25em;
+}
+
+.review-number {
+  font-size: .65em;
+}

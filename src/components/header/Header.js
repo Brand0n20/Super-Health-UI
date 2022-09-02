@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import GoogleLogin, { GoogleLogout } from 'react-google-login';
 import styles from './Header.module.css';
 import loginUser from './HeaderService';
 import constants from '../../utils/constants';
+import { useCart } from '../checkout-page/CartContext';
 
 /**
  * @name Header
@@ -14,6 +15,12 @@ const Header = () => {
   const [user, setUser] = useState('');
   const [googleError, setGoogleError] = useState('');
   const [apiError, setApiError] = useState(false);
+  /**
+   * Set user in local storage when there is a change in the state of user
+   */
+  useEffect(() => {
+    sessionStorage.setItem('user', JSON.stringify({ user }));
+  }, [user]);
 
   /**
    * @name handleGoogleLoginSuccess
@@ -32,7 +39,7 @@ const Header = () => {
   };
 
   /**
-   * @name handleGoogleLoginSuccess
+   * @name handleGoogleLoginFailure
    * @description Function to run if google login was unsuccessful
    */
   const handleGoogleLoginFailure = () => {
@@ -48,6 +55,7 @@ const Header = () => {
   const handleGoogleLogoutSuccess = () => {
     setUser('');
     setGoogleError('');
+    window.location.reload(false);
   };
 
   /**
@@ -60,6 +68,10 @@ const Header = () => {
     );
   };
 
+  const {
+    state: { products }
+  } = useCart();
+
   return (
     <div data-testid="header" className={styles.HeaderStyling}>
       <NavLink to="/home">
@@ -67,8 +79,12 @@ const Header = () => {
       </NavLink>
       <NavLink to="/checkout">
         <img data-testid="cart" className={styles.cart} src="assets/cartguy.gif" alt="cartguy" title="Checkout Page" />
+        {products.length !== 0 && (
+        <div className={styles.qtyCircle} data-testid="cartQty">{products.length}</div>
+        )}
       </NavLink>
-      <NavLink to="/products">
+
+      <NavLink to="">
         <img data-testid="productsButton" className={styles.productsButton} src="assets/product-icon.gif" alt="products" title="Products Page" />
       </NavLink>
 
@@ -81,26 +97,27 @@ const Header = () => {
           onSuccess={handleGoogleLoginSuccess}
           onFailure={handleGoogleLoginFailure}
           cookiePolicy="single_host_origin"
+          isSignedIn
           alt="login"
         />
       ) : (
-        <GoogleLogout
-          data-testid="logout"
-          className={styles.googlebutton}
-          clientId={constants.GOOGLE_CLIENT_ID}
-          buttonText="Logout"
-          onLogoutSuccess={handleGoogleLogoutSuccess}
-          onFailure={handleGoogleLogoutFailure}
-        />
-      )}
-      {user && (
-        <span data-testid="lastname" className={styles.name}>{user.lastName[0].concat('.')}</span>
-      )}
-      {user && <span data-testid="firstname" className={styles.name}>{user.firstName}</span>}
-      {user && (
-        <span data-testid="circle" className={styles.circle}>
-          <img src="assets/user.svg" alt="user" />
-        </span>
+        <>
+          <GoogleLogout
+            data-testid="logout"
+            className={styles.googlebutton}
+            clientId={constants.GOOGLE_CLIENT_ID}
+            buttonText="Logout"
+            onLogoutSuccess={handleGoogleLogoutSuccess}
+            onFailure={handleGoogleLogoutFailure}
+          />
+          <NavLink to="/profile" className={styles.alignright}>
+            <span data-testid="lastname" className={styles.name}>{user.lastName[0].concat('.')}</span>
+            <span data-testid="firstname" className={styles.name}>{user.firstName}</span>
+            <span data-testid="circle" className={styles.circle}>
+              <img src="assets/user.svg" alt="user" />
+            </span>
+          </NavLink>
+        </>
       )}
       {googleError && <span>{googleError}</span>}
       {apiError && <span>Api Error</span>}

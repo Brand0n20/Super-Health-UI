@@ -87,9 +87,9 @@ const CreationPage = () => {
    * @name handleSubmit
    * @description New product is added to database after button is clicked
    * Successful messages will appear before redirecting to maintenance page
-   * If unsuccesful, error message will appear
+   * If unsuccesful, error message will appear and the input fields will persist with session storage values
    */
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const validatorResults = validateAddProductForm(productData);
@@ -98,6 +98,8 @@ const CreationPage = () => {
       setValidationData(validatorResults.getResults());
       return;
     }
+    setValidationData(validator.initialize(initialState));
+    sessionStorage.setItem('productData', JSON.stringify(productData));
 
     productData.primaryColorCode = `#${productData.primaryColorCode}`;
     productData.secondaryColorCode = `#${productData.secondaryColorCode}`;
@@ -108,10 +110,14 @@ const CreationPage = () => {
     productData.quantity = parseInt(productData.quantity, 10);
     productData.active = productData.active === 'true';
 
-    postProducts(productData, setApiError, history);
-
-    setValidationData(validator.initialize(initialState));
-    setProductData(initialState);
+    const createProducts = await postProducts(productData, setApiError, history);
+    if (createProducts != null) {
+      setApiError(false);
+      setValidationData(validator.initialize(initialState));
+      setProductData(initialState);
+    } else {
+      setProductData(JSON.parse(sessionStorage.getItem('productData')));
+    }
   };
 
   /**
@@ -128,11 +134,11 @@ const CreationPage = () => {
         <AddProductForm onChange={onProductChange} productData={productData} validationData={validationData} />
       </form>
       <div>
-        {ApiError && (
+        { ApiError && (
           <p className={styles.errMsg} data-testid="errMsg">
             {constants.API_ERROR}
           </p>
-        )}
+        ) }
       </div>
       <div className={styles.buttonBlock}>
         <button

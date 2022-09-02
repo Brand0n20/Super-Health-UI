@@ -28,10 +28,16 @@ test('renders the products button', () => {
   expect(screen.getByRole('img', { name: 'products' })).toBeInTheDocument();
 });
 
+test('cart quantity badge should not show at first', () => {
+  render(<App />);
+
+  expect(screen.queryByTestId('cartQty')).not.toBeInTheDocument();
+});
+
 test('products button redirects to products page', () => {
   render(<App />);
 
   fireEvent.click(screen.getByTestId('productsButton'));
 
-  expect(global.window.location.href).toContain('/products');
+  expect(global.window.location.href).toContain('/');
 });

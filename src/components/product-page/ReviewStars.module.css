@@ -1,0 +1,30 @@
+.review-stars {
+  position: relative;
+  width: 80px;
+  height: 100%;
+}
+
+.review-stars .mask {
+  position: relative;
+  display: flex;
+  height: min-content;
+  width: inherit;
+  z-index: 2;
+
+}
+
+.review-stars .outline {
+  position: absolute;
+  width: inherit;
+  left: 0;
+  top: -25px;
+  z-index: 3;
+}
+
+.rating-bar {
+  height: inherit;
+  position: absolute;
+  top: 0;
+  background-color: #FFBD8E;
+  z-index: 1;
+}

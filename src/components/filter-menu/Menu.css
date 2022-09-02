@@ -1,0 +1,38 @@
+#menu {
+    width: 11rem;
+    height: calc(100% - 48px);
+    background-color:   rgb(6, 123, 55);
+    position: fixed;
+    top: 68px;
+    left: 0;
+    transition: transform .3s cubic-bezier(0, .52, 0, 1);
+    overflow: auto;
+    z-index: 1000;
+}
+
+.menu {
+    padding-bottom: 20%;
+    overflow: auto;
+}
+#menu.hide {
+    transform: translate3d(-11rem, 0, 0);
+}
+
+#menu.show {
+    transform: translate3d(0vw, 0, 0);
+    overflow: auto;
+}
+
+.control-button {
+    background-color: rgb(25, 183, 91);
+    border-radius: 2px;
+    border: none;
+    color: whitesmoke;
+    cursor: pointer;
+    margin-left: 25px;
+    width: 100px;
+}
+
+#filter {
+    padding-bottom: 20%;
+}

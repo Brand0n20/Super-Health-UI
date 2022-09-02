@@ -9,7 +9,7 @@
 class Validator {
   _hasErrorKeyName = 'isError';
 
-  _errorMessageKeyName = 'errorMessage'
+  _errorMessageKeyName = 'errorMessage';
 
   _validationResults = {};
 

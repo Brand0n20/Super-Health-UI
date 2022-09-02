@@ -3,13 +3,27 @@
     "react-app",
     "airbnb",
     "airbnb/hooks",
-    "plugin:jsx-a11y/recommended"
+    "plugin:jsx-a11y/recommended",
+    "react-app"
   ],
-  "plugins": ["jsx-a11y"],
+  "plugins": [
+    "jsx-a11y"
+  ],
   "rules": {
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
+      }
+    ],
     "linebreak-style": 0,
-    "comma-dangle": ["error", "never"],
+    "comma-dangle": [
+      "error",
+      "never"
+    ],
     "react/prop-types": 0
   }
 }

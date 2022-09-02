@@ -1,6 +1,7 @@
+/* eslint-disable max-len */
 import React from 'react';
 
-const CartContext = React.createContext();
+export const CartContext = React.createContext();
 
 function cartReducer(state, action) {
   switch (action.type) {
@@ -11,6 +12,14 @@ function cartReducer(state, action) {
       };
     }
     case 'add': {
+      const currentProduct = state.products.find((stateProduct) => stateProduct.title === action.product.title);
+      if (currentProduct !== undefined) {
+        currentProduct.quantity += 1;
+        return {
+          ...state,
+          products: [...state.products]
+        };
+      }
       return {
         ...state,
         products: [...state.products, action.product]

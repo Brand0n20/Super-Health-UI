@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Collapsible from './Collapsible';
 import styles from './Filter.module.css';
 
@@ -7,53 +7,62 @@ import styles from './Filter.module.css';
  * @description Creates a filter component that can display price fields
  * @returns A dropdown with two input fields that persist on refresh.
  */
-const PriceFilter = () => {
-  const [input, setInput] = useState({
-    maxPrice: '',
-    minPrice: ''
-  });
+const PriceFilter = ({
+  setFilterState, max, setMax, min, setMin, maxInput, setMaxInput, minInput, setMinInput
+}) => {
+  let updatedList1 = max;
+  let updatedList2 = min;
+  const handleChangeMax = (evt) => {
+    updatedList1 = evt.target.value ? `${evt.target.name}=${evt.target.value}` : '';
+    setMax(updatedList1);
+    setMaxInput(evt.target.value);
+    const url = [`${updatedList1}`, `${updatedList2}`].filter(Boolean).join('&');
+    setFilterState(url);
+  };
 
-  const handleChange = (evt) => {
-    const { value } = evt.target;
-    setInput({
-      ...input,
-      [evt.target.name]: value
-    });
+  const handleChangeMin = (evt) => {
+    updatedList2 = evt.target.value ? `${evt.target.name}=${evt.target.value}` : '';
+    setMin(updatedList2);
+    setMinInput(evt.target.value);
+    const url = [`${updatedList1}`, `${updatedList2}`].filter(Boolean).join('&');
+    setFilterState(url);
   };
 
   return (
-    <Collapsible
-      title="Price"
-    >
-      <>
-        <label htmlFor={input} className={styles.filterParagraphTextbox}>
-          Max Price
-          <input
-            type="number"
-            name="maxPrice"
-            id="maxPrice"
-            min="0"
-            placeholder="0.00"
-            value={input.maxPrice}
-            className={styles.filterInput}
-            onChange={handleChange}
-          />
-        </label>
-        <label htmlFor={input} className={styles.filterParagraphTextbox}>
-          Min Price
-          <input
-            type="number"
-            name="minPrice"
-            id="minPrice"
-            min="0"
-            placeholder="0.00"
-            value={input.minPrice}
-            className={styles.filterInput}
-            onChange={handleChange}
-          />
-        </label>
-      </>
-    </Collapsible>
+    <div>
+      <Collapsible
+        title="Price"
+      >
+        <>
+          <label htmlFor={min} className={styles.filterParagraphTextbox}>
+            Min Price
+            <input
+              type="number"
+              name="min-price"
+              id="min-price"
+              min="0"
+              placeholder="0.00"
+              value={minInput}
+              className={styles.filterInput}
+              onChange={handleChangeMin}
+            />
+          </label>
+          <label htmlFor={max} className={styles.filterParagraphTextbox}>
+            Max Price
+            <input
+              type="number"
+              name="max-price"
+              id="max-price"
+              min="0"
+              placeholder="0.00"
+              value={maxInput}
+              className={styles.filterInput}
+              onChange={handleChangeMax}
+            />
+          </label>
+        </>
+      </Collapsible>
+    </div>
   );
 };
 
