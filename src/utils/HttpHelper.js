@@ -8,7 +8,7 @@ import Constants from './constants';
  * @param {Object} payload object to send
  * @return {Promise} - Promise from the fetch call
  */
-export default (route, method, payload) => fetch(Constants.BASE_URL_API + route, {
+const HttpHelper = (route, method, payload) => fetch(Constants.BASE_URL_API + route, {
   method,
   headers: {
     'Content-Type': 'application/json',
@@ -16,3 +16,5 @@ export default (route, method, payload) => fetch(Constants.BASE_URL_API + route,
   },
   body: JSON.stringify(payload)
 });
+
+export default HttpHelper;

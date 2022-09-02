@@ -6,10 +6,11 @@ import customToast from '../customizable-toast/customToast';
  * @name postProducts
  * @description Utilizes HttpHelper to make a post request to an API
  * @param {*} productData details on products to be created
+ * @param {*} setApiError sets error if API fails
  * @param {*} history useHistory to redirect page
  */
-const postProducts = (productData, setApiError, history) => {
-  HttpHelper(constants.PRODUCTS_ENDPOINT, 'POST', productData)
+const postProducts = async (productData, setApiError, history) => {
+  await HttpHelper(constants.PRODUCTS_ENDPOINT, 'POST', productData)
     .then((response) => {
       if (response.status === 201) {
         setApiError(false);

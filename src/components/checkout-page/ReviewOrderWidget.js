@@ -1,7 +1,7 @@
-import React from 'react';
+import { React, useEffect, useState } from 'react';
 import { useCart } from './CartContext';
 import OrderItem from './OrderItem';
-import { getSubtotal } from './ReviewOrderWidgetService';
+import { getShippingCost, getSubtotal, fetchShippingCost } from './ReviewOrderWidgetService';
 import styles from './ReviewOrderWidget.module.css';
 
 /**
@@ -9,7 +9,13 @@ import styles from './ReviewOrderWidget.module.css';
  * @description Displays order items and subtotal
  * @return component
  */
-const ReviewOrderWidget = () => {
+const ReviewOrderWidget = ({ state }) => {
+  const [shippingCost, setShippingCost] = useState({});
+
+  useEffect(() => {
+    fetchShippingCost(`${state}`, setShippingCost);
+  }, [state]);
+
   const {
     state: { products }
   } = useCart();
@@ -37,6 +43,19 @@ const ReviewOrderWidget = () => {
         </div>
         <div className={styles.price}>
           <p>{getSubtotal(products)}</p>
+        </div>
+      </div>
+      <div className={styles.subtotal}>
+        <div>
+          <p>Shipping Cost</p>
+        </div>
+        <div className={styles.price}>
+          <p>{getShippingCost(products, state, shippingCost)}</p>
+        </div>
+      </div>
+      <div>
+        <div>
+          <p>Total Cost</p>
         </div>
       </div>
     </>

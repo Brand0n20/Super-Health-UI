@@ -2,7 +2,7 @@ import React from 'react';
 import { unmountComponentAtNode } from 'react-dom';
 import { render, screen } from '@testing-library/react';
 import ProductPage from './ProductPage';
-import fetchProducts from './ProductPageService';
+import { fetchProducts } from './ProductPageService';
 
 jest.mock('./ProductPageService');
 let container = null;
@@ -21,8 +21,8 @@ describe('ProductPage Component Tests', () => {
     container = null;
   });
 
-  it('shows error msg text when an error is thrown', () => {
-    fetchProducts.mockImplementation((setProducts, setApiError) => {
+  it('shows error msg text when an error is thrown', async () => {
+    fetchProducts.mockImplementation((url, setProducts, setApiError) => {
       setApiError(true);
     });
     render(

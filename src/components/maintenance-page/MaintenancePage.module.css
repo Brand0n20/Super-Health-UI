@@ -26,7 +26,7 @@
 }
 
 .Maintenance {
-  margin-top: 70px;
+  margin-top: 30px;
 }
 
 .rowColor:nth-child(even) {
@@ -49,7 +49,6 @@
   table {
     display: block;
     max-width: -moz-fit-content;
-    overflow-x: auto;
   }
 }
 

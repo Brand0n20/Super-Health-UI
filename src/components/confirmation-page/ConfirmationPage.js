@@ -33,7 +33,7 @@ const ConfirmationPage = () => {
   const displayConfirmationProducts = (message) => (
     <div>
       {message.products.map(({ product, quantity }) => (
-        <>
+        <div key={product.id}>
           <div>
             <div>Name: </div>
             {product.name}
@@ -42,7 +42,7 @@ const ConfirmationPage = () => {
             <div>Quantity:</div>
             {quantity}
           </div>
-        </>
+        </div>
       ))}
     </div>
   );

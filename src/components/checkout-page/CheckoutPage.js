@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { useCart } from './CartContext';
@@ -46,6 +46,13 @@ const CheckoutPage = () => {
    * Reactive variable to hold deliveryData and its setMethod()
    */
   const [deliveryData, setDeliveryData] = React.useState({});
+
+  /**
+  * Set user in local storage when there is a change in the state of user
+  */
+  useEffect(() => {
+    sessionStorage.setItem('deliveryData', JSON.stringify({ deliveryData }));
+  }, [deliveryData]);
 
   /**
    * Updates the delivery data when there is a change in its form
@@ -143,7 +150,7 @@ const CheckoutPage = () => {
     <div className={styles.checkoutContainer}>
       <div className={`${styles.step} ${styles.order}`}>
         <h3 className={styles.title}>1. Review Order</h3>
-        <ReviewOrderWidget />
+        <ReviewOrderWidget state={deliveryData.state} />
       </div>
       <div className={`${styles.step} ${styles.delivery}`}>
         <h3 className={styles.title}>2. Delivery Address</h3>

@@ -14,8 +14,6 @@ const hasSpaces = (property) => /[\s\t\n]/.test(property);
 
 const anythingNotSpaces = (property) => /[^\s\t\n]/.test(property);
 
-// const hasNumbers = (property) => /[0-9]/.test(property);
-
 const hasSpecialCharacters = (property) => /[!@#$%^&*()]/.test(property);
 
 const onlyLettersDashesApostrophesSpaces = (property) => /[^A-Za-z-' ]/.test(property);
@@ -23,8 +21,6 @@ const onlyLettersDashesApostrophesSpaces = (property) => /[^A-Za-z-' ]/.test(pro
 const phoneIsDashedFormat = (property) => /^\d{3}-\d{3}-\d{4}$/.test(property);
 
 const isFiveFourDashedNumberFormat = (property) => /^\d{5}-\d{4}$/.test(property);
-
-// const isOnlyNumbersOrDashes = (property) => /[^0-9-]/.test(property);
 
 const beginsWithANumber = (property) => /^\d+/.test(property);
 
@@ -40,7 +36,35 @@ const hasAtFollowedByPeriod = (property) => /\S+@\S+\.\S+/.test(property);
 
 const cardHolderNameFormat = (property) => /^[A-Z][a-z-']+\s[A-Z][a-z-']+$/.test(property);
 
-const creditCardExpiration = (property) => /^(0[1-9]|1[0-2])\/?(\d{2})$/.test(property);
+const creditCardExpiration = (property) => /^(0[1-9]|1[0-2])\/(\d{2})$/.test(property);
+
+/**
+ * @description Compares the entered date with the current date
+ * @param {String} property the field the user has entered
+ * @returns a boolean, true means it is not expired, false means it is expired
+ */
+const creditCardDateExpiration = (property) => {
+  const today = new Date();
+  const thisMonth = today.getMonth() + 1;
+  const thisYear = today.getFullYear() % 100;
+  const month = property.slice(0, 2);
+  const year = property.slice(3, 5);
+  if (Number(year) === thisYear) {
+    return month >= thisMonth;
+  }
+  return year > thisYear;
+};
+
+// Name of the card Validation
+export const textWithSpacesOnly = (value) => {
+  if (value) {
+    if (/^[a-zA-Z ]*$/i.test(value)) {
+      return undefined;
+    }
+    return 'Only alphabets';
+  }
+  return undefined;
+};
 
 /**
  * @name ValidateFirstName
@@ -121,12 +145,11 @@ export const ValidateStreet = (street) => {
  */
 export const ValidateStreetTwo = (street2) => {
   const errorMessage = { message: 'Message', status: null };
-  if (!anythingNotSpaces(street2)) {
-    errorMessage.message = 'Street2 can not be empty';
-    errorMessage.status = true;
-  } else if (hasSpecialCharacters(street2)) {
-    errorMessage.message = 'Street2 can not use special characters';
-    errorMessage.status = true;
+  if (!isRequired(street2)) {
+    if (!anythingNotSpaces(street2)) {
+      errorMessage.message = 'Street2 can not be empty';
+      errorMessage.status = true;
+    }
   }
   return errorMessage;
 };
@@ -205,7 +228,7 @@ export const ValidateEmail = (email) => {
     errorMessage.message = 'Email can not contain spaces';
     errorMessage.status = true;
   } else if (!hasAtFollowedByPeriod(email)) {
-    errorMessage.message = 'Email must be fromat email@email.com';
+    errorMessage.message = 'Email must be format email@email.com';
     errorMessage.status = true;
   }
   return errorMessage;
@@ -262,7 +285,10 @@ export const ValidateCreditCardNumber = (cardNumber) => {
 export const ValidateCvvNumber = (cvv) => {
   const errorMessage = { message: 'Message', status: null };
   if (isRequired(cvv)) {
-    errorMessage.message = 'Cvv number is required';
+    errorMessage.message = 'CVV Number is required';
+    errorMessage.status = true;
+  } else if (!anythingNotSpaces(cvv)) {
+    errorMessage.message = 'CVV can not be empty';
     errorMessage.status = true;
   } else if (!isGroupOfThreeNumbers(cvv)) {
     errorMessage.message = 'Cvv must be a group of three numbers';
@@ -282,8 +308,14 @@ export const ValidateCardExpiration = (expiration) => {
   if (isRequired(expiration)) {
     errorMessage.message = 'Expiration date is required';
     errorMessage.status = true;
+  } else if (!anythingNotSpaces(expiration)) {
+    errorMessage.message = 'Expiration can not be empty';
+    errorMessage.status = true;
   } else if (!creditCardExpiration(expiration)) {
-    errorMessage.message = 'Invalid expiration date';
+    errorMessage.message = 'Expiration Date must be in MM/YY format';
+    errorMessage.status = true;
+  } else if (!creditCardDateExpiration(expiration)) {
+    errorMessage.message = 'Credit Card is expired';
     errorMessage.status = true;
   }
   return errorMessage;
@@ -299,6 +331,9 @@ export const ValidateCardholderName = (cardholder) => {
   const errorMessage = { message: 'Message', status: null };
   if (isRequired(cardholder)) {
     errorMessage.message = 'Cardholder Name is required';
+    errorMessage.status = true;
+  } else if (!anythingNotSpaces(cardholder)) {
+    errorMessage.message = 'Cardholder can not be empty';
     errorMessage.status = true;
   } else if (!cardHolderNameFormat(cardholder)) {
     errorMessage.message = 'Cardholder Name must be correct format';

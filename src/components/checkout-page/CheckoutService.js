@@ -10,7 +10,22 @@ import Constants from '../../utils/constants';
  * @returns - A DTO used to make a post to purchases
  */
 export const createPurchaseObject = (productData, deliveryAddress, billingAddress, creditCard) => {
+  const storage = JSON.parse(sessionStorage.getItem('user'));
   const products = productData.map(({ id, quantity }) => ({ product: { id }, quantity }));
+
+  let userEmail = '';
+
+  const date = new Date();
+  const yyyy = date.getFullYear();
+  let mm = date.getMonth() + 1; // Months start at 0!
+  let dd = date.getDate();
+  if (mm < 10) mm = `0${mm}`;
+  if (dd < 10) dd = `0${dd}`;
+  const purchaseDate = `${mm}/${dd}/${yyyy}`;
+
+  if (storage.user) {
+    userEmail = storage.user.email;
+  }
   const purchaseObject = {
     products,
     deliveryAddress: {
@@ -36,7 +51,9 @@ export const createPurchaseObject = (productData, deliveryAddress, billingAddres
       cvv: creditCard.cvv,
       expiration: creditCard.expiration,
       cardholder: creditCard.cardholder
-    }
+    },
+    purchaseDate,
+    userEmail
   };
   return purchaseObject;
 };
@@ -50,11 +67,7 @@ export const createPurchaseObject = (productData, deliveryAddress, billingAddres
  */
 const makePurchase = async (products, deliveryAddress, billingAddress, creditCard) => {
   const fetchPromise = await HttpHelper(Constants.PURCHASE_ENDPOINT, 'POST', createPurchaseObject(products, deliveryAddress, billingAddress, creditCard))
-    .then((response) => response.json()).catch((error) => {
-      // Connection Error Toast!
-      /* eslint-disable no-console */
-      console.log(error);
-      /* eslint-enable no-console */
+    .then((response) => response.json()).catch(() => {
     });
   return fetchPromise;
 };
