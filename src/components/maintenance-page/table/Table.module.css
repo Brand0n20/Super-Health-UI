@@ -1,56 +1,143 @@
+.table-container {
+  display: flex;
+  place-content: center;
+  width: 100%;
+}
+
 .table {
+  background-color: #0eb71e;
+  border-radius: 5px;
+  color: #fff;
+  overflow: overlay;
+  padding-bottom: 1.2rem;
   position: relative;
+  height: 69vh;
+  width: 100%;
   display: grid;
-  width: max-content;
-  background-color: rgb(138, 138, 138);
-  overflow-x: scroll;
-  grid-auto-columns: max-content;
-  width: 10vw;
+
+  /* Splits table between header and body */
+  grid-template-rows: 1fr 2fr;
 }
 
 .table::-webkit-scrollbar {
-  scrollbar-width: thin;
+  height: 20px;
+  width: 20px;
 }
 
-.table-body::-webkit-scrollbar {
- display: none;
+.table::-webkit-scrollbar-thumb {
+  border-radius: 50rem;
+  border: 7px solid transparent;
+  box-shadow: inset 0 0 10px 10px rgba(0, 0, 0, 0.201);
 }
 
-.table-body::-webkit-scrollbar-track {
-  width: 2em;
+.table::-webkit-scrollbar-thumb:vertical {
+  height: 3rem;
 }
+
+.table::-webkit-scrollbar-corner {
+  width: 0;
+}
+
+/* Gives the vertical scrollbar margin to not scroll all the way to the top of the box */
+
+.table::-webkit-scrollbar-track {
+  margin-top: 45px;
+}
+
+.table-header {
+  height: 3rem;
+  position: sticky;
+  z-index: 2;
+  top: 0;
+  background-color: #0eb71e;
+  box-shadow: 0 5px 20px #0eb71f7c;
+  display: grid;
+  align-items: center;
+}
+
 .table-row {
-  display: flex;
+  height: 3rem;
+  align-items: center;
+
+  display: grid;
 }
 
 .table-row:nth-child(even) {
-  background-color: rgb(98, 221, 98);
+  background-color: #53e961;
 }
 
 .table-row:nth-child(odd) {
-  background-color: rgb(144,238,144);
+  background-color: #4ccd58;
+}
+
+.table-cell-container {
+  position: relative;
+  margin: 0 1rem;
 }
 
 .table-cell {
-  min-width: 125px;
-  max-width: 200px;
-  overflow: auto;
-  height: 100px;
-  padding-left: 6px;
-  
-  /* display: flex;
-  justify-content: flex-start;
-  align-items: center;*/
+  align-self: center;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.scrollable {
-  overflow-y: scroll;
+.table-cell-container .tooltip {
+  position: absolute;
+  visibility: hidden;
+  color: white;
+  background-color: #0eb71e;
+  left: 30%;
+  width: max-content;
+  max-width: 14rem;
+  padding: 1rem;
+  border-radius: 5px;
+  overflow-wrap: break-word;
+  box-shadow: 0 5px 20px #0eb71f7c;
 }
 
-.scrollable-x {
-  overflow-x: scroll;
+.table-cell-container:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+  z-index: 1;
 }
 
-.scrollable-y {
-  overflow-y: scroll;
+/* tooltip offsets */
+.bottom {
+  bottom: 0;
+}
+
+.top {
+  top: 0;
+}
+
+/* column sizes */
+.tiny {
+  width: 4rem;
+}
+
+.small {
+  width: 6rem;
+}
+
+.medium {
+  width: 12rem;
+}
+
+.large {
+  width: 14.5rem;
+}
+
+/* number of columns */
+
+.table,
+.table-header,
+.table-row {
+  grid-template-columns: repeat(18, 1fr);
+}
+
+.table-header,
+.table-row {
+  grid-column: span 18;
 }

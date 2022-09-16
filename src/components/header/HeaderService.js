@@ -67,4 +67,4 @@ const loginUser = async (googleUser, setUser, setApiError) => {
   }
 };
 
-export default loginUser;
+export { loginUser, getUserByEmail };

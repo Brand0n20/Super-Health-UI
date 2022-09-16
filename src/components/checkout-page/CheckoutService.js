@@ -2,7 +2,9 @@ import HttpHelper from '../../utils/HttpHelper';
 import Constants from '../../utils/constants';
 
 /**
- * Creates a purchase object from the purchases forms data
+ * @description - Creates a purchase object from the purchases
+ * forms data and stamps the purchase with the current date
+ * @author - Andrew Salerno
  * @param {*} productData - An array of products
  * @param {*} deliveryAddress - Delivery Address form data
  * @param {*} billingAddress - Billing Address form data
@@ -19,9 +21,11 @@ export const createPurchaseObject = (productData, deliveryAddress, billingAddres
   const yyyy = date.getFullYear();
   let mm = date.getMonth() + 1; // Months start at 0!
   let dd = date.getDate();
+  const minute = date.getMinutes();
+  const ss = date.getSeconds();
   if (mm < 10) mm = `0${mm}`;
   if (dd < 10) dd = `0${dd}`;
-  const purchaseDate = `${mm}/${dd}/${yyyy}`;
+  const purchaseDate = `${yyyy}/${mm}/${dd}/${minute}min /${ss}s`;
 
   if (storage.user) {
     userEmail = storage.user.email;
@@ -61,6 +65,7 @@ export const createPurchaseObject = (productData, deliveryAddress, billingAddres
 /**
  *
  * @name makePayment
+ * @author - Andrew Salerno
  * @description sends a purchase request
  * @param {*} cartContents items to purchase
  * @returns payment confirmation response

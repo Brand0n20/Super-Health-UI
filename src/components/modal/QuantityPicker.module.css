@@ -1,0 +1,36 @@
+.paragraphTextbox {
+    text-align: center;
+    width: 45px;
+    height: 30px;
+}
+
+.input {
+    font-size: var(--size, 2rem);
+    font-weight: bold;
+    border: none;
+    color: #0EB71E;
+    justify-content: center;
+    text-align: center;
+    width: var(--width, 45px);
+    height: var(--height, 30px);
+    padding: 0.8rem;
+    background-color: transparent;
+}
+
+.button {
+    font-size: var(--size, x-large);
+    font-weight: bold;
+    color: white;
+    background-color: #0EB71E;
+    width: var(--buttonWidth, 2rem);
+    height: var(--buttonHeight, 4rem);
+    border: none;
+    border-radius: 6px;
+    padding: var(--buttonPadding, 1rem 2.5rem 1rem 1.8rem);
+    text-align: center;
+}
+
+.button:hover {
+    background-color: rgb(255, 255, 147);
+    color: #0EB71E;
+}

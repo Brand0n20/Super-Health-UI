@@ -6,16 +6,19 @@ import styles from './ProductPage.module.css';
 import Constants from '../../utils/constants';
 import { fetchProducts } from './ProductPageService';
 import MenuContainer from '../filter-menu/MenuContainer';
+import ProductModal from '../modal/ProductModal';
 
 /**
  * @name ProductPage
  * @description fetches products from API and displays products as product cards
  * @return component
  */
-const ProductPage = () => {
+const ProductPage = ({ updateUserTime }) => {
   const [products, setProducts] = useState([]);
   const [apiError, setApiError] = useState(false);
   const [url, setUrl] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
+  const [productInfo, setProductInfo] = useState([]);
 
   useEffect(() => {
     fetchProducts(`${url}`, setProducts, setApiError);
@@ -35,12 +38,23 @@ const ProductPage = () => {
       <div className={styles.app}>
         {products.map(
           (product) => product.active && (
-            <div key={product.id}>
-              <ProductCard product={product} />
-            </div>
+          <div key={product.id}>
+            <ProductCard
+              product={product}
+              setProductInfo={setProductInfo}
+              setIsOpen={setIsOpen}
+              updateUserTime={updateUserTime}
+            />
+          </div>
           )
         )}
       </div>
+      <ProductModal
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+        productInfo={productInfo}
+        updateUserTime={updateUserTime}
+      />
     </div>
   );
 };

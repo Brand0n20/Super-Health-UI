@@ -1,17 +1,25 @@
 /**
  * @description - Validates if an input is required
+ * @author - Andrew Salerno
  * @param {*string} property - The input value being validated
  * @returns - If the input is required
  */
 const isRequired = (property) => (property === '' || property == null);
 
 /**
- * @description - Validates if an input has spaces
+ * @description - Checks if an input has spaces
+ * @author -Andrew Salerno
  * @param {*string} property - The input value being validated
  * @returns - If the input contains spaces
  */
 const hasSpaces = (property) => /[\s\t\n]/.test(property);
 
+/**
+ * @description - Checks if an input has anything not a space
+ * @author - Andrew Salerno
+ * @param {*string} property - The input value being validated
+ * @returns - If the input contain anything not a space
+ */
 const anythingNotSpaces = (property) => /[^\s\t\n]/.test(property);
 
 const hasSpecialCharacters = (property) => /[!@#$%^&*()]/.test(property);
@@ -55,19 +63,9 @@ const creditCardDateExpiration = (property) => {
   return year > thisYear;
 };
 
-// Name of the card Validation
-export const textWithSpacesOnly = (value) => {
-  if (value) {
-    if (/^[a-zA-Z ]*$/i.test(value)) {
-      return undefined;
-    }
-    return 'Only alphabets';
-  }
-  return undefined;
-};
-
 /**
  * @name ValidateFirstName
+ * @author - Andrew Salerno
  * @description - Validates a First Name input for:
  * isRequired, hasSpaces, hasNumbers, only letters, dashes -, or apostrophes '
  * @param {*string} firstName - First Name value to be validated
@@ -90,6 +88,7 @@ export const ValidateFirstName = (firstName) => {
 
 /**
  * @name ValidateLastName
+ * @author - Andrew Salerno
  * @description - Validates a Last Name input for:
  * isRequired, hasSpaces, hasNumbers, only letters, dashes -, or apostrophes '
  * @param {*string} lastName - Last Name value to be validated
@@ -112,6 +111,7 @@ export const ValidateLastName = (lastName) => {
 
 /**
  * @name ValidateStreet
+ * @author - Andrew Salerno
  * @description - Validates a Street input
  * @param {*string} street - The street infromation to be validated
  * @returns - An error message and and error status
@@ -139,6 +139,7 @@ export const ValidateStreet = (street) => {
 
 /**
  * @name ValidateStreetTwo
+ * @author - Andrew Salerno
  * @description - Validates a Street2 input
  * @param {*string} street2 - Street2 information to be validated
  * @returns - An error message and an error status
@@ -156,6 +157,7 @@ export const ValidateStreetTwo = (street2) => {
 
 /**
  * @name ValidateCity
+ * @author - Andrew Salerno
  * @description - Validates a City input
  * @param {*string} city - City information to be validated
  * @returns - An error message and an error status
@@ -171,12 +173,16 @@ export const ValidateCity = (city) => {
   } else if (hasSpecialCharacters(city)) {
     errorMessage.message = 'City can not use special characters';
     errorMessage.status = true;
+  } else if (onlyLettersDashesApostrophesSpaces(city)) {
+    errorMessage.message = 'City must only use letters,\ndashes, or apostrophes';
+    errorMessage.status = true;
   }
   return errorMessage;
 };
 
 /**
  * @name ValidateState
+ * @author - Andrew Salerno
  * @description - Validates a State input
  * @param {*string} state - State information to be validated
  * @returns - An error message and an error status
@@ -186,12 +192,19 @@ export const ValidateState = (state) => {
   if (isRequired(state)) {
     errorMessage.message = 'State is required';
     errorMessage.status = true;
+  } else if (hasSpecialCharacters(state)) {
+    errorMessage.message = 'City can not use special characters';
+    errorMessage.status = true;
+  } else if (onlyLettersDashesApostrophesSpaces(state)) {
+    errorMessage.message = 'City must only use letters,\ndashes, or apostrophes';
+    errorMessage.status = true;
   }
   return errorMessage;
 };
 
 /**
  * @name ValidateZip
+ * @author - Andrew Salerno
  * @description - Validates a Zip code input
  * @param {*string} zip - Zip code information to be validated
  * @returns - An error message and an error status
@@ -215,6 +228,7 @@ export const ValidateZip = (zip) => {
 
 /**
  * @name ValidateEmail
+ * @author - Andrew Salerno
  * @description - Validates an Email input
  * @param {*string} email - Email to be validated
  * @returns - An error message and an error status
@@ -236,6 +250,7 @@ export const ValidateEmail = (email) => {
 
 /**
  * @name ValidatePhone
+ * @author - Andrew Salerno
  * @description - Validates a phone input
  * @param {*string} phone - The Phone information to be validated
  * @returns - An error message and an error status

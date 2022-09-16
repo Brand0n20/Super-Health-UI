@@ -1,0 +1,26 @@
+.modal_styles {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 50px;
+  z-index: 1000;
+}
+
+.overlay_styles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+}
+
+.closeButton {
+  position: absolute;
+  right: 5px;
+  top: 10px;
+  background-color: transparent;
+  border: none;
+}

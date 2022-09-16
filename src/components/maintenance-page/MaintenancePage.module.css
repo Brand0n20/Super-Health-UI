@@ -1,48 +1,68 @@
+.maintenance-page {
+  margin: 0 1rem;
+}
+
+.button-row {
+  padding: 1rem 0;
+  display: flex;
+}
+
 .button {
-  font-size: 15px;
-  margin-right: 20px;
-  margin-bottom: 20px;
-  background: lightsalmon;
-  border-radius: 20px;
-  color:black;
-  border-color:antiquewhite;
-  font-weight: 400;
+  border: none;
+  border-radius: 50rem;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.074);
+  font-size: 1rem;
+  font-weight: 500;
+  padding: .75rem;
+}
+
+.button:hover {
+ cursor: pointer;
+ background-color: salmon;
+ color: #fff;
+ transition: all .2s;
+}
+
+.create-product-button {
+  background-color: #F7FF97;
+  color: #02652A;
+
+}
+
+.table-buttons {
+  display: flex;
+}
+
+.table-buttons > button {
+  background-color: transparent;
+  border: none;
+ 
+}
+
+.table-buttons > button:nth-child(2) {
+  margin-left: .5rem;
+}
+
+.table-buttons > button:hover svg path {
   cursor: pointer;
-  height: 40px;
-  width: 35%;
-  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  fill: white;
+  transition: all .2s;
+} 
+
+.table-buttons svg {
+  width: 1rem;
 }
 
-.buttonBlock {
-  margin: 10px 20%;
+.spinner {
+  left: 50%;
+  top: 40%;
 }
 
-.scrollable {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  overflow: auto;
-}
-
-.Maintenance {
-  margin-top: 30px;
-}
-
-.rowColor:nth-child(even) {
-  background-color: rgb(98, 221, 98);
-}
-
-.rowColor:nth-child(odd) {
-  background-color: rgb(144,238,144);
-}
-
-
-.header {
-  vertical-align: middle;
-  background-color: rgb(30, 210, 105);
-  position: sticky;
-  top: 7.1%;
+.spinner-small {
+  width: 30px;
+  position: absolute;
+  top: -6.3rem;
+  left: .6rem;
 }
 
 @media (max-width: 700px) {
@@ -50,11 +70,4 @@
     display: block;
     max-width: -moz-fit-content;
   }
-}
-
-td { 
-  min-width: 100px;
-  padding-left: 6px;
-  border: 1px solid white;
- 
 }

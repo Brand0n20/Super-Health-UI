@@ -17,7 +17,6 @@ import ShareIcon from '@material-ui/icons/Share';
 import StarIcon from '@material-ui/icons/Star';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import styles from './ProductCard.module.css';
-import Constants from '../../utils/constants';
 import { useCart } from '../checkout-page/CartContext';
 import { fetchRatingAverageByProductId } from '../product-page/ReviewService';
 import customToast from '../customizable-toast/customToast';
@@ -56,25 +55,32 @@ const useStyles = makeStyles((theme) => ({
  * @param {*} props product
  * @return component
  */
-const ProductCard = ({ product }) => {
+const ProductCard = ({
+  product, setProductInfo, setIsOpen, updateUserTime
+}) => {
   const classes = useStyles();
   const [ratingAverage, setRatingAverage] = useState(null);
   const [apiError, setApiError] = useState();
   const { dispatch } = useCart();
   const onAdd = () => {
-    customToast('Added product to cart!', 'success');
-    dispatch(
-      {
-        type: 'add',
-        product: {
-          id: product.id,
-          title: product.name,
-          price: product.price,
-          description: product.description,
-          quantity: 1
-        }
+    updateUserTime();
+    customToast('The product is successfully added to cart!', 'success');
+    dispatch({
+      type: 'add',
+      product: {
+        id: product.id,
+        title: product.name,
+        price: product.price,
+        imageSrc: product.imageSrc,
+        description: product.description,
+        quantity: 1
       }
-    );
+    });
+  };
+
+  const modalAction = () => {
+    setProductInfo(product);
+    setIsOpen(true);
   };
 
   useEffect(() => {
@@ -83,35 +89,54 @@ const ProductCard = ({ product }) => {
 
   return (
     <Card className={classes.root}>
-      <CardHeader
-        avatar={(
-          <Avatar aria-label="demographics" className={classes.avatar}>
-            {product.demographic.charAt(0)}
-          </Avatar>
-        )}
-        action={(
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        )}
-        title={product.name}
-        subheader={`${product.demographic} ${product.category} ${product.type}`}
-      />
-      <CardMedia
-        className={classes.media}
-        image={Constants.PLACEHOLDER_IMAGE}
-        title="placeholder"
-      />
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          {product.description}
-        </Typography>
-        <br />
-        <Typography variant="body2" color="textSecondary" component="p">
-          Price: $
-          {product.price.toFixed(2)}
-        </Typography>
-      </CardContent>
+      <div
+        className={styles.modalAction}
+        onClick={modalAction}
+        role="button"
+        tabIndex="0"
+        onKeyPress={modalAction}
+      >
+        <CardHeader
+          avatar={(
+            <Avatar
+              aria-label="demographics"
+              className={classes.avatar}
+            >
+              {product.demographic.charAt(0)}
+            </Avatar>
+          )}
+          action={(
+            <IconButton aria-label="settings">
+              <MoreVertIcon />
+            </IconButton>
+          )}
+          title={product.name}
+          subheader={`${product.demographic} ${product.category} ${product.type}`}
+        />
+        <CardMedia
+          className={classes.media}
+          image={product.imageSrc}
+          title="placeholder"
+        />
+        <CardContent>
+          <Typography
+            variant="body2"
+            color="textSecondary"
+            component="p"
+          >
+            {product.description}
+          </Typography>
+          <br />
+          <Typography
+            variant="body2"
+            color="textSecondary"
+            component="p"
+          >
+            Price: $
+            {product.price.toFixed(2)}
+          </Typography>
+        </CardContent>
+      </div>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
@@ -119,16 +144,23 @@ const ProductCard = ({ product }) => {
         <IconButton aria-label="share">
           <ShareIcon />
         </IconButton>
-        <IconButton aria-label="add to shopping cart" data-testid="addToCart" onClick={onAdd}>
+        <IconButton
+          aria-label="add to shopping cart"
+          data-testid="addToCart"
+          onClick={onAdd}
+        >
           <AddShoppingCartIcon />
         </IconButton>
         {!apiError && ratingAverage !== null && (
-        <Link to={`/products/${product.id}`} className={styles.link}>
-          <IconButton className={styles['review-button']}>
-            <StarIcon />
-            <span className={styles['review-number']}>{ratingAverage}</span>
-          </IconButton>
-        </Link>
+          <Link
+            to={`/products/${product.id}`}
+            className={styles.link}
+          >
+            <IconButton className={styles['review-button']}>
+              <StarIcon />
+              <span className={styles['review-number']}>{ratingAverage}</span>
+            </IconButton>
+          </Link>
         )}
       </CardActions>
     </Card>
