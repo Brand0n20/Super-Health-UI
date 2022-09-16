@@ -7,9 +7,10 @@ import styles from './Product.module.css';
 import ReviewCard from './ReviewCard';
 import { fetchReviewsByProductId } from './ReviewService';
 import { fetchProductsById } from './ProductPageService';
+import AddReview from './AddReview';
 
 /**
- * @author Kevin Davis
+ * @author Kevin Davis, Franc Laghom
  * @description Displays the components that make up a product page
  * @returns component
  */
@@ -54,6 +55,14 @@ const Product = () => {
             <ChevronDown style={dateSortBy === 'Oldest' ? { transform: 'rotate(180deg)' } : {}} data-testid="Chevron" />
           </button>
         </div>
+
+        <AddReview
+          product={product}
+          productId={productId}
+          setReviews={setReviews}
+          setApiError={setApiError}
+        />
+        <br />
         <div className={styles['review-list']}>
           {reviews.length === 0 && <p>There are currently no reviews for this product!</p>}
           {dateSortBy === 'Oldest' && reviews.sort((a, b) => new Date(a.postedDate) - new Date(b.postedDate)).map((review) => <ReviewCard title={review.title} comment={review.comment} postedDate={review.postedDate} rating={review.rating} user={review.user} key={review.id} />)}

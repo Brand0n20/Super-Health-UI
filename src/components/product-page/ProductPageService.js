@@ -35,12 +35,15 @@ export const fetchProducts = async (url, setProducts, setApiError) => {
  */
 
 export const fetchProductsById = async (productId, setProduct, setApiError) => {
-  await HttpHelper(`${Constants.PRODUCTS_ENDPOINT}/${productId}`).then((response) => {
-    if (response.ok) {
-      return response.json();
-    }
-    throw new Error(Constants.API_ERROR);
-  }).then(setProduct).catch(() => {
-    setApiError(true);
-  });
+  await HttpHelper(`${Constants.PRODUCTS_ENDPOINT}/${productId}`)
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error(Constants.API_ERROR);
+    })
+    .then(setProduct)
+    .catch(() => {
+      setApiError(true);
+    });
 };

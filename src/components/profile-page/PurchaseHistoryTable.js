@@ -4,6 +4,7 @@ import styles from './ProfilePage.module.css';
 
 /**
  * Event handler for View Items dropdown
+ * @name onViewProducts
  * @param {*} event - onClick event of a View Items button
  */
 const onViewProducts = (event) => {
@@ -19,61 +20,63 @@ const onViewProducts = (event) => {
   }
 };
 
+const sortPurchaseKeys = (a, b) => b.purchaseKey - a.purchaseKey;
+
+const sortDates = (a, b) => new Date(b.purchaseDate) - new Date(a.purchaseDate);
+
 /**
  * @name PurchaseHistoryTable
  * @description - Constructs a table component from purchase histroty data
  * @returns - JSX template of the purchases history table
  */
 const PurchaseHistoryTable = ({ purchaseHistory }) => {
-  if (purchaseHistory) {
-    if (purchaseHistory.length !== 0) {
-      purchaseHistory.sort((a, b) => b.purchaseKey - a.purchaseKey);
-      purchaseHistory.sort((a, b) => new Date(b.purchaseDate) - new Date(a.purchaseDate));
-      return (
-        <table>
-          <div className={styles.overFlow}>
-            <thead>
-              <th className={styles.sticky}>Purchase Date</th>
-              <th className={styles.sticky}>Total Price</th>
-              <th className={styles.sticky}>Items</th>
-            </thead>
-            <tbody>
-              {purchaseHistory.map(({
-                purchaseKey, purchaseDate, purchaseCost, products
-              }) => (
-                <tr key={purchaseKey} className={styles.rowHeight}>
-                  <td className={styles.dateWidth}>{purchaseDate}</td>
-                  <td>{`$${purchaseCost.toFixed(2)}`}</td>
-                  <td className={styles.itemWidth}>
-                    <button type="button" className={styles.collapsible} onClick={onViewProducts}>View Items</button>
-                    <div className={styles.content}>
-                      <table className={styles.centerMargin}>
-                        <thead>
-                          <th>Name</th>
-                          <th>Quantity</th>
-                          <th>Cost</th>
-                        </thead>
-                        <tbody>
-                          {products.map(({
-                            productKey, name, quantity, productCost
-                          }) => (
-                            <tr key={productKey}>
-                              <td>{name}</td>
-                              <td>{quantity}</td>
-                              <td>{`$${productCost.toFixed(2)}`}</td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </div>
-        </table>
-      );
-    }
+  if (purchaseHistory && purchaseHistory.length !== 0) {
+    purchaseHistory.sort(sortPurchaseKeys);
+    purchaseHistory.sort(sortDates);
+    return (
+      <table>
+        <div className={styles.overFlow}>
+          <thead>
+            <th className={styles.sticky}>Purchase Date</th>
+            <th className={styles.sticky}>Total Price</th>
+            <th className={styles.sticky}>Items</th>
+          </thead>
+          <tbody>
+            {purchaseHistory.map(({
+              purchaseKey, purchaseDate, purchaseCost, products
+            }) => (
+              <tr key={purchaseKey} className={styles.rowHeight}>
+                <td className={styles.dateWidth}>{purchaseDate}</td>
+                <td>{`$${purchaseCost.toFixed(2)}`}</td>
+                <td className={styles.itemWidth}>
+                  <button type="button" className={styles.collapsible} onClick={onViewProducts}>View Items</button>
+                  <div className={styles.content}>
+                    <table className={styles.centerMargin}>
+                      <thead>
+                        <th>Name</th>
+                        <th>Quantity</th>
+                        <th>Cost</th>
+                      </thead>
+                      <tbody>
+                        {products.map(({
+                          productKey, name, quantity, productCost
+                        }) => (
+                          <tr key={productKey}>
+                            <td>{name}</td>
+                            <td>{quantity}</td>
+                            <td>{`$${productCost.toFixed(2)}`}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </div>
+      </table>
+    );
   }
   return (
     <>

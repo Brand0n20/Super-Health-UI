@@ -14,3 +14,7 @@
 .review-number {
   font-size: .65em;
 }
+
+.modalAction{
+  cursor: pointer;
+}

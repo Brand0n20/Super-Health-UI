@@ -13,13 +13,11 @@ import {
  * @param {*object} creditCard - Data from the Credit Card form
  * @returns - An object of error messages used to set reactive states
  */
-export const ValidatePurchase = (deliveryAddress, billingAddress, creditCard) => {
+const ValidatePurchase = (deliveryAddress, billingAddress, creditCard) => {
   clearErrorsObject();
   ValidateDeliveryAddress(deliveryAddress);
   ValidateBillingAddress(billingAddress);
   ValidateCreditCard(creditCard);
 };
 
-export const ValidateFormTwo = () => {
-
-};
+export default ValidatePurchase;

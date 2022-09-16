@@ -119,3 +119,23 @@ h4{
   text-align: center;
 }
 
+.button {
+  font-size: 15px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  background: lightsalmon;
+  border-radius: 20px;
+  color:black;
+  border-color:antiquewhite;
+  font-weight: 400;
+  cursor: pointer;
+  height: 30px;
+  width: 40%;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.buttonBlock, .errMsg {
+  margin-top: 50px;
+  text-align: center;
+  margin-left: 20px;
+}

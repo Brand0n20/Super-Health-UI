@@ -1,5 +1,6 @@
 import HttpHelper from '../../utils/HttpHelper';
 import Constants from '../../utils/constants';
+import customToast from '../customizable-toast/customToast';
 
 /**
  * @author Kevin Davis
@@ -56,8 +57,6 @@ export const fetchRatingAverageByProductId = async (productId, setRatingAverage,
 
       throw new Error(Constants.API_ERROR);
     }).then((data) => {
-      // eslint-disable-next-line max-len
-
       if (data.length !== 0) {
         const average = data
           .reduce((accumulator, review) => accumulator + review.rating, 0) / data.length;
@@ -65,4 +64,15 @@ export const fetchRatingAverageByProductId = async (productId, setRatingAverage,
         setRatingAverage(roundedAverage);
       }
     }).catch(() => setApiError(true));
+};
+
+/**
+ * Submit a post request to the backend.
+ * @author Franc Laghom
+ * @param {Object} review -Review to post
+ */
+export const postReview = async (review) => {
+  await HttpHelper(Constants.REVIEWS_ENDPOINT, 'POST', review)
+    .then((response) => response.json())
+    .catch(() => customToast('Ooops, something went wrong. Please try again leter.', 'error'));
 };
