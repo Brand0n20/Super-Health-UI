@@ -1,0 +1,26 @@
+.form {
+    width: 100%;
+    padding: 25px;
+
+}
+
+.container {
+    width: 75%;
+    display: table;
+    border: black thin solid;
+    border-radius: 25px;
+    margin: auto;
+}
+
+.center {
+    margin: auto;
+    width: 60%;
+    padding: 10px;
+}
+
+.padding {
+    padding-left: 15px;
+}
+
+
+

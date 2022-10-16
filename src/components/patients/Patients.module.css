@@ -1,0 +1,27 @@
+.container {
+    padding-left: 20px;
+}
+
+.errMsg {
+    color: red;
+    font-size: 14px;
+    margin: 0px 2px 4px 4px;
+  }
+
+li {
+    list-style: none;
+}
+
+.button {
+    margin-left: 15px;
+}
+
+.content {
+    padding: 15px 15px 15px 15px;
+}
+
+.patients {
+    display: inline;
+    float: left;
+    margin-right: 20px;
+}
