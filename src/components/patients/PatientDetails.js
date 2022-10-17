@@ -1,33 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
-import { useNavigate } from 'react-router-dom/dist';
+import { fetchPatientById, updatePatient } from './PatientService';
 import Constants from '../../utils/constants';
 import styles from './CreatePatient.module.css';
 import FormItem from '../form/FormItem';
-import { postPatient } from './PatientService';
 import FormItemDropdown from '../form/FormItemDropdown';
 import {
   getErrorsObject, errorsObjectIsNullOrEmpty, ValidatePatient
 } from '../form/validation/orchestrators';
 
-const initialState = {
-  firstName: null,
-  lastName: null,
-  ssn: null,
-  email: null,
-  street: null,
-  city: null,
-  state: null,
-  postal: null,
-  age: null,
-  height: null,
-  weight: null,
-  insurance: null,
-  gender: null
-};
-
-const CreatePatient = () => {
-  const [patientData, setPatientData] = useState(initialState);
+const PatientDetails = () => {
+  const { id } = useParams();
+  const [patientData, setPatientData] = useState([]);
   const [apiError, setApiError] = useState();
   const navigate = useNavigate();
   const [errorMessages, setErrorMessages] = useState({});
@@ -35,8 +20,12 @@ const CreatePatient = () => {
     'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS',
     'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'CM', 'OH', 'OK', 'OR', 'PA',
     'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY'];
-
   const genders = ['Male', 'Female', 'Other'];
+
+  useEffect(() => {
+    fetchPatientById(id, setPatientData, setApiError);
+  }, [id]);
+
   const onPatientDataChange = (e) => {
     setPatientData({ ...patientData, [e.target.id]: e.target.value });
   };
@@ -45,15 +34,15 @@ const CreatePatient = () => {
     navigate('/patients');
   };
 
-  const handleCreate = async () => {
+  const handleUpdate = async () => {
     ValidatePatient(patientData);
     setErrorMessages(getErrorsObject());
+    console.log(patientData);
     if (errorsObjectIsNullOrEmpty()) {
-      await postPatient(patientData, setApiError);
+      await updatePatient(id, patientData, setApiError);
       changePage();
     }
   };
-
   return (
     <div className={styles.center}>
       {apiError && (
@@ -64,6 +53,7 @@ const CreatePatient = () => {
         {Constants.API_ERROR}
       </p>
       )}
+      <Button onClick={() => navigate('/patients')} className={styles.goBack}>Go back to Patients Page</Button>
       <div className={styles.container}>
         <form className={styles.form}>
           <div className="form-row">
@@ -231,11 +221,10 @@ const CreatePatient = () => {
             errorMessage={errorMessages.state}
             isError={errorMessages.stateIsError}
           />
-          <Button type="button" form="submit" onClick={handleCreate}>Update</Button>
+          <Button type="button" form="submit" onClick={handleUpdate}>Create</Button>
         </form>
       </div>
     </div>
   );
 };
-
-export default CreatePatient;
+export default PatientDetails;

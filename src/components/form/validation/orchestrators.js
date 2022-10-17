@@ -1,7 +1,7 @@
 import {
-  ValidateFirstName, ValidateLastName, ValidateStreet, ValidateStreetTwo,
-  ValidateCity, ValidateState, ValidateZip, ValidateEmail, ValidatePhone,
-  ValidateCreditCardNumber, ValidateCvvNumber, ValidateCardExpiration, ValidateCardholderName
+  ValidateFirstName, ValidateLastName, ValidateStreet, ValidateSocial,
+  ValidateCity, ValidateState, ValidateZip, ValidateEmail,
+  ValidateGender, ValidateInsurance, ValidateAge, ValidateHeight, ValidateWeight
 } from './helpers';
 
 /**
@@ -40,134 +40,58 @@ export const errorsObjectIsNullOrEmpty = () => Object.values(errorMessagesObject
   return false;
 });
 
-/**
- * @name ValidateDeliveryAddress
- * @author - Andrew Salerno
- * @description Validates the deliveryAddress form
- * @param {*object} param0 - Delivery Address form data
- */
-export const ValidateDeliveryAddress = (deliveryAddress) => {
-  let errors = {};
-  errors = ValidateFirstName(deliveryAddress.firstName);
-  errorMessagesObject.deliveryFirstName = errors.message;
-  errorMessagesObject.deliveryFirstNameIsError = errors.status;
-
-  errors = ValidateLastName(deliveryAddress.lastName);
-  errorMessagesObject.deliveryLastName = errors.message;
-  errorMessagesObject.deliveryLastNameIsError = errors.status;
-
-  errors = ValidateStreet(deliveryAddress.street);
-  errorMessagesObject.deliveryStreet = errors.message;
-  errorMessagesObject.deliveryStreetIsError = errors.status;
-
-  errors = ValidateStreetTwo(deliveryAddress.street2);
-  errorMessagesObject.deliveryStreet2 = errors.message;
-  errorMessagesObject.deliveryStreet2IsError = errors.status;
-
-  errors = ValidateCity(deliveryAddress.city);
-  errorMessagesObject.deliveryCity = errors.message;
-  errorMessagesObject.deliveryCityIsError = errors.status;
-
-  errors = ValidateState(deliveryAddress.state);
-  errorMessagesObject.deliveryState = errors.message;
-  errorMessagesObject.deliveryStateIsError = errors.status;
-
-  errors = ValidateZip(deliveryAddress.zip);
-  errorMessagesObject.deliveryZip = errors.message;
-  errorMessagesObject.deliveryZipIsError = errors.status;
-};
-
-/**
- * @name ValidateBillingAddress
- * @author - Andrew Salerno
- * @description Validates the billingAddress form
- * @param {*object} param0 - Billing Address form data
- */
-export const ValidateBillingAddress = (billingAddress) => {
-  let errors = {};
-  errors = ValidateStreet(billingAddress.street);
-  errorMessagesObject.billingStreet = errors.message;
-  errorMessagesObject.billingStreetIsError = errors.status;
-
-  errors = ValidateStreetTwo(billingAddress.street2);
-  errorMessagesObject.billingStreet2 = errors.message;
-  errorMessagesObject.billingStreet2IsError = errors.status;
-
-  errors = ValidateCity(billingAddress.city);
-  errorMessagesObject.billingCity = errors.message;
-  errorMessagesObject.billingCityIsError = errors.status;
-
-  errors = ValidateState(billingAddress.state);
-  errorMessagesObject.billingState = errors.message;
-  errorMessagesObject.billingStateIsError = errors.status;
-
-  errors = ValidateZip(billingAddress.zip);
-  errorMessagesObject.billingZip = errors.message;
-  errorMessagesObject.billingZipIsError = errors.status;
-
-  errors = ValidateEmail(billingAddress.email);
-  errorMessagesObject.billingEmail = errors.message;
-  errorMessagesObject.billingEmailIsError = errors.status;
-
-  errors = ValidatePhone(billingAddress.phone);
-  errorMessagesObject.billingPhone = errors.message;
-  errorMessagesObject.billingPhoneIsError = errors.status;
-};
-
-/**
- * @name ValidateCreditCard
- * @author - Andrew Salerno
- * @description - Validates the creditCard form
- * @param {*object} creditCard - Credit Card form data
- */
-export const ValidateCreditCard = (creditCard) => {
-  let errors = {};
-  errors = ValidateCreditCardNumber(creditCard.cardNumber);
-  errorMessagesObject.cardNumber = errors.message;
-  errorMessagesObject.cardNumberIsError = errors.status;
-
-  errors = ValidateCvvNumber(creditCard.cvv);
-  errorMessagesObject.cvv = errors.message;
-  errorMessagesObject.cvvIsError = errors.status;
-
-  errors = ValidateCardExpiration(creditCard.expiration);
-  errorMessagesObject.expiration = errors.message;
-  errorMessagesObject.expirationIsError = errors.status;
-
-  errors = ValidateCardholderName(creditCard.cardholder);
-  errorMessagesObject.cardholder = errors.message;
-  errorMessagesObject.cardholderIsError = errors.status;
-};
-
-/**
- * @name ValidateProfileAccount
- * @description - Validates the RenderShippingAdress form
- * @param {*object} profileAccount - RenderShipping Adress form data
- */
-export const ValidateProfileAccount = (profileAccount) => {
+export const ValidatePatient = (patient) => {
   let errors = {};
   clearErrorsObject();
-  errors = ValidateFirstName(profileAccount.firstName);
+  errors = ValidateFirstName(patient.firstName);
   errorMessagesObject.firstName = errors.message;
   errorMessagesObject.firstNameIsError = errors.status;
 
-  errors = ValidateLastName(profileAccount.lastName);
+  errors = ValidateLastName(patient.lastName);
   errorMessagesObject.lastName = errors.message;
   errorMessagesObject.lastNameIsError = errors.status;
 
-  errors = ValidateStreet(profileAccount.street);
+  errors = ValidateEmail(patient.email);
+  errorMessagesObject.email = errors.message;
+  errorMessagesObject.emailIsError = errors.status;
+
+  errors = ValidateSocial(patient.ssn);
+  errorMessagesObject.ssn = errors.message;
+  errorMessagesObject.ssnIsError = errors.status;
+
+  errors = ValidateStreet(patient.street);
   errorMessagesObject.street = errors.message;
   errorMessagesObject.streetIsError = errors.status;
 
-  errors = ValidateCity(profileAccount.city);
+  errors = ValidateCity(patient.city);
   errorMessagesObject.city = errors.message;
   errorMessagesObject.cityIsError = errors.status;
 
-  errors = ValidateState(profileAccount.state);
+  errors = ValidateState(patient.state);
   errorMessagesObject.state = errors.message;
   errorMessagesObject.stateIsError = errors.status;
 
-  errors = ValidateZip(profileAccount.zip);
-  errorMessagesObject.zip = errors.message;
-  errorMessagesObject.zipIsError = errors.status;
+  errors = ValidateZip(patient.postal);
+  errorMessagesObject.postal = errors.message;
+  errorMessagesObject.postalIsError = errors.status;
+
+  errors = ValidateGender(patient.gender);
+  errorMessagesObject.gender = errors.message;
+  errorMessagesObject.genderIsError = errors.status;
+
+  errors = ValidateInsurance(patient.insurance);
+  errorMessagesObject.insurance = errors.message;
+  errorMessagesObject.insuranceIsError = errors.status;
+
+  errors = ValidateAge(patient.age);
+  errorMessagesObject.age = errors.message;
+  errorMessagesObject.ageIsError = errors.status;
+
+  errors = ValidateHeight(patient.height);
+  errorMessagesObject.height = errors.message;
+  errorMessagesObject.heightIsError = errors.status;
+
+  errors = ValidateWeight(patient.weight);
+  errorMessagesObject.weight = errors.message;
+  errorMessagesObject.weightIsError = errors.status;
 };

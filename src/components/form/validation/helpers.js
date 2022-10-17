@@ -1,6 +1,5 @@
 /**
  * @description - Validates if an input is required
- * @author - Andrew Salerno
  * @param {*string} property - The input value being validated
  * @returns - If the input is required
  */
@@ -8,7 +7,6 @@ const isRequired = (property) => (property === '' || property == null);
 
 /**
  * @description - Checks if an input has spaces
- * @author -Andrew Salerno
  * @param {*string} property - The input value being validated
  * @returns - If the input contains spaces
  */
@@ -16,7 +14,6 @@ const hasSpaces = (property) => /[\s\t\n]/.test(property);
 
 /**
  * @description - Checks if an input has anything not a space
- * @author - Andrew Salerno
  * @param {*string} property - The input value being validated
  * @returns - If the input contain anything not a space
  */
@@ -34,38 +31,14 @@ const beginsWithANumber = (property) => /^\d+/.test(property);
 
 const notNumbersOrSpaces = (property) => /[^0-9\s\t\n]/.test(property);
 
-const isGroupOfThreeNumbers = (property) => /^\d{3}$/.test(property);
-
 const isGroupOfFiveNumbers = (property) => /^\d{5}$/.test(property);
 
-const isGroupOfSixteenNumbers = (property) => /^\d{16}$/.test(property);
+const isValidSocialSecurityNumber = (property) => /^(?!219-09-9999|078-05-1120)(?!666|000|9\d{2})\d{3}-(?!00)\d{2}-(?!0{4})\d{4}$/.test(property);
 
-const hasAtFollowedByPeriod = (property) => /\S+@\S+\.\S+/.test(property);
-
-const cardHolderNameFormat = (property) => /^[A-Z][a-z-']+\s[A-Z][a-z-']+$/.test(property);
-
-const creditCardExpiration = (property) => /^(0[1-9]|1[0-2])\/(\d{2})$/.test(property);
-
-/**
- * @description Compares the entered date with the current date
- * @param {String} property the field the user has entered
- * @returns a boolean, true means it is not expired, false means it is expired
- */
-const creditCardDateExpiration = (property) => {
-  const today = new Date();
-  const thisMonth = today.getMonth() + 1;
-  const thisYear = today.getFullYear() % 100;
-  const month = property.slice(0, 2);
-  const year = property.slice(3, 5);
-  if (Number(year) === thisYear) {
-    return month >= thisMonth;
-  }
-  return year > thisYear;
-};
+const isValidEmail = (property) => /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(property);
 
 /**
  * @name ValidateFirstName
- * @author - Andrew Salerno
  * @description - Validates a First Name input for:
  * isRequired, hasSpaces, hasNumbers, only letters, dashes -, or apostrophes '
  * @param {*string} firstName - First Name value to be validated
@@ -77,7 +50,7 @@ export const ValidateFirstName = (firstName) => {
     errorMessage.message = 'First Name is required';
     errorMessage.status = true;
   } else if (!anythingNotSpaces(firstName)) {
-    errorMessage.message = 'First Name can not be empty';
+    errorMessage.message = 'First Name is required';
     errorMessage.status = true;
   } else if (onlyLettersDashesApostrophesSpaces(firstName)) {
     errorMessage.message = 'First Name must only use letters,\ndashes, or apostrophes';
@@ -88,7 +61,6 @@ export const ValidateFirstName = (firstName) => {
 
 /**
  * @name ValidateLastName
- * @author - Andrew Salerno
  * @description - Validates a Last Name input for:
  * isRequired, hasSpaces, hasNumbers, only letters, dashes -, or apostrophes '
  * @param {*string} lastName - Last Name value to be validated
@@ -100,7 +72,7 @@ export const ValidateLastName = (lastName) => {
     errorMessage.message = 'Last Name is required';
     errorMessage.status = true;
   } else if (!anythingNotSpaces(lastName)) {
-    errorMessage.message = 'Last Name can not be empty';
+    errorMessage.message = 'Last Name is required';
     errorMessage.status = true;
   } else if (onlyLettersDashesApostrophesSpaces(lastName)) {
     errorMessage.message = 'Last Name must only use letters,\ndashes, or apostrophes';
@@ -110,8 +82,28 @@ export const ValidateLastName = (lastName) => {
 };
 
 /**
+ * @name ValidateSocial
+ * @description - Validates ssn and makes sure format is correct
+ * @param {*} ssn - social security number to be validated
+ * @returns - An error message and error status
+ */
+export const ValidateSocial = (ssn) => {
+  const errorMessage = { message: 'Message', status: null };
+  if (isRequired(ssn)) {
+    errorMessage.message = 'SSN is required';
+    errorMessage.status = true;
+  } else if (!anythingNotSpaces(ssn)) {
+    errorMessage.message = 'SSN is required';
+    errorMessage.status = true;
+  } else if (!isValidSocialSecurityNumber(ssn)) {
+    errorMessage.message = 'SSN  must match DDD-DD-DDDD format';
+    errorMessage.status = true;
+  }
+  return errorMessage;
+};
+
+/**
  * @name ValidateStreet
- * @author - Andrew Salerno
  * @description - Validates a Street input
  * @param {*string} street - The street infromation to be validated
  * @returns - An error message and and error status
@@ -122,7 +114,7 @@ export const ValidateStreet = (street) => {
     errorMessage.message = 'Street is required';
     errorMessage.status = true;
   } else if (!anythingNotSpaces(street)) {
-    errorMessage.message = 'Street can not be empty';
+    errorMessage.message = 'Street is required';
     errorMessage.status = true;
   } else if (!notNumbersOrSpaces(street)) {
     errorMessage.message = 'Street can not be only numbers';
@@ -138,26 +130,7 @@ export const ValidateStreet = (street) => {
 };
 
 /**
- * @name ValidateStreetTwo
- * @author - Andrew Salerno
- * @description - Validates a Street2 input
- * @param {*string} street2 - Street2 information to be validated
- * @returns - An error message and an error status
- */
-export const ValidateStreetTwo = (street2) => {
-  const errorMessage = { message: 'Message', status: null };
-  if (!isRequired(street2)) {
-    if (!anythingNotSpaces(street2)) {
-      errorMessage.message = 'Street2 can not be empty';
-      errorMessage.status = true;
-    }
-  }
-  return errorMessage;
-};
-
-/**
  * @name ValidateCity
- * @author - Andrew Salerno
  * @description - Validates a City input
  * @param {*string} city - City information to be validated
  * @returns - An error message and an error status
@@ -168,7 +141,7 @@ export const ValidateCity = (city) => {
     errorMessage.message = 'City is required';
     errorMessage.status = true;
   } else if (!anythingNotSpaces(city)) {
-    errorMessage.message = 'City can not be empty';
+    errorMessage.message = 'City is required';
     errorMessage.status = true;
   } else if (hasSpecialCharacters(city)) {
     errorMessage.message = 'City can not use special characters';
@@ -182,7 +155,6 @@ export const ValidateCity = (city) => {
 
 /**
  * @name ValidateState
- * @author - Andrew Salerno
  * @description - Validates a State input
  * @param {*string} state - State information to be validated
  * @returns - An error message and an error status
@@ -190,13 +162,13 @@ export const ValidateCity = (city) => {
 export const ValidateState = (state) => {
   const errorMessage = { message: 'Message', status: null };
   if (isRequired(state)) {
-    errorMessage.message = 'State is required';
+    errorMessage.message = 'Must select a state';
     errorMessage.status = true;
   } else if (hasSpecialCharacters(state)) {
-    errorMessage.message = 'City can not use special characters';
+    errorMessage.message = 'Must select a state';
     errorMessage.status = true;
   } else if (onlyLettersDashesApostrophesSpaces(state)) {
-    errorMessage.message = 'City must only use letters,\ndashes, or apostrophes';
+    errorMessage.message = 'Must select a state';
     errorMessage.status = true;
   }
   return errorMessage;
@@ -204,21 +176,20 @@ export const ValidateState = (state) => {
 
 /**
  * @name ValidateZip
- * @author - Andrew Salerno
  * @description - Validates a Zip code input
  * @param {*string} zip - Zip code information to be validated
  * @returns - An error message and an error status
  */
-export const ValidateZip = (zip) => {
+export const ValidateZip = (postal) => {
   const errorMessage = { message: 'Message', status: null };
-  if (isRequired(zip)) {
+  if (isRequired(postal)) {
     errorMessage.message = 'Zip code is required';
     errorMessage.status = true;
-  } else if (!anythingNotSpaces(zip)) {
-    errorMessage.message = 'Zip code can not be empty';
+  } else if (!anythingNotSpaces(postal)) {
+    errorMessage.message = 'Zip code is required';
     errorMessage.status = true;
-  } else if (!isGroupOfFiveNumbers(zip)) {
-    if (!isFiveFourDashedNumberFormat(zip)) {
+  } else if (!isGroupOfFiveNumbers(postal)) {
+    if (!isFiveFourDashedNumberFormat(postal)) {
       errorMessage.message = 'Zip must be format 12345 or 12345-6789';
       errorMessage.status = true;
     }
@@ -228,7 +199,6 @@ export const ValidateZip = (zip) => {
 
 /**
  * @name ValidateEmail
- * @author - Andrew Salerno
  * @description - Validates an Email input
  * @param {*string} email - Email to be validated
  * @returns - An error message and an error status
@@ -239,10 +209,10 @@ export const ValidateEmail = (email) => {
     errorMessage.message = 'Email is required';
     errorMessage.status = true;
   } else if (hasSpaces(email)) {
-    errorMessage.message = 'Email can not contain spaces';
+    errorMessage.message = 'Must be a valid email';
     errorMessage.status = true;
-  } else if (!hasAtFollowedByPeriod(email)) {
-    errorMessage.message = 'Email must be format email@email.com';
+  } else if (!isValidEmail(email)) {
+    errorMessage.message = 'Must be a valid email';
     errorMessage.status = true;
   }
   return errorMessage;
@@ -250,7 +220,6 @@ export const ValidateEmail = (email) => {
 
 /**
  * @name ValidatePhone
- * @author - Andrew Salerno
  * @description - Validates a phone input
  * @param {*string} phone - The Phone information to be validated
  * @returns - An error message and an error status
@@ -271,87 +240,73 @@ export const ValidatePhone = (phone) => {
 };
 
 /**
- * @name ValidateCreditCardNumber
- * @description - Validates a Credit Card number input
- * @param {*string} cardNumber - The Credit Card information to be validated
+ * @name ValidateInsurance
+ * @description - Validates a insurance input for:
+ * isRequired, hasSpaces, hasNumbers, only letters, dashes -, or apostrophes '
+ * @param {*string} insurance - Insurance value to be validated
  * @returns - An error message and an error status
  */
-export const ValidateCreditCardNumber = (cardNumber) => {
+export const ValidateInsurance = (insurance) => {
   const errorMessage = { message: 'Message', status: null };
-  if (isRequired(cardNumber)) {
-    errorMessage.message = 'Credit Card is required';
+  if (isRequired(insurance)) {
+    errorMessage.message = 'Insurance is required';
     errorMessage.status = true;
-  } else if (!anythingNotSpaces(cardNumber)) {
-    errorMessage.message = 'Credit Card can not be empty';
+  } else if (!anythingNotSpaces(insurance)) {
+    errorMessage.message = 'Insurance is required';
     errorMessage.status = true;
-  } else if (!isGroupOfSixteenNumbers(cardNumber)) {
-    errorMessage.message = 'Credit Card must be a group of sixteen numbers';
+  } else if (onlyLettersDashesApostrophesSpaces(insurance)) {
+    errorMessage.message = 'Insurance must only use letters,\ndashes, or apostrophes';
     errorMessage.status = true;
   }
   return errorMessage;
 };
 
 /**
- * @name ValidateCvvNumber
- * @description - Validates a Cvv number input
- * @param {*string} cvv - Cvv number to be validated
+ * @name ValidateGender
+ * @description - Validates a Gender input
+ * @param {*string} gender - Gender information to be validated
  * @returns - An error message and an error status
  */
-export const ValidateCvvNumber = (cvv) => {
+export const ValidateGender = (gender) => {
   const errorMessage = { message: 'Message', status: null };
-  if (isRequired(cvv)) {
-    errorMessage.message = 'CVV Number is required';
-    errorMessage.status = true;
-  } else if (!anythingNotSpaces(cvv)) {
-    errorMessage.message = 'CVV can not be empty';
-    errorMessage.status = true;
-  } else if (!isGroupOfThreeNumbers(cvv)) {
-    errorMessage.message = 'Cvv must be a group of three numbers';
+  if (isRequired(gender)) {
+    errorMessage.message = 'Must select either Male, Female, or Other';
     errorMessage.status = true;
   }
   return errorMessage;
 };
 
-/**
- * @name ValidateCardExpiration
- * @description - Validates a credit card expiration date input
- * @param {*string} expiration - Expiration date to be validated
- * @returns - An error message and an error status
- */
-export const ValidateCardExpiration = (expiration) => {
+export const ValidateAge = (age) => {
   const errorMessage = { message: 'Message', status: null };
-  if (isRequired(expiration)) {
-    errorMessage.message = 'Expiration date is required';
+  if (isRequired(age)) {
+    errorMessage.message = 'Age is required';
     errorMessage.status = true;
-  } else if (!anythingNotSpaces(expiration)) {
-    errorMessage.message = 'Expiration can not be empty';
-    errorMessage.status = true;
-  } else if (!creditCardExpiration(expiration)) {
-    errorMessage.message = 'Expiration Date must be in MM/YY format';
-    errorMessage.status = true;
-  } else if (!creditCardDateExpiration(expiration)) {
-    errorMessage.message = 'Credit Card is expired';
+  } else if (age <= 0) {
+    errorMessage.message = 'Age is must be a positive number';
     errorMessage.status = true;
   }
   return errorMessage;
 };
 
-/**
- * @name ValidateCardholderName
- * @description - Validates a Cardholder Name input
- * @param {*string} cardholder - Cardholder Name to be validated
- * @returns - An error message and an error status
- */
-export const ValidateCardholderName = (cardholder) => {
+export const ValidateHeight = (height) => {
   const errorMessage = { message: 'Message', status: null };
-  if (isRequired(cardholder)) {
-    errorMessage.message = 'Cardholder Name is required';
+  if (isRequired(height)) {
+    errorMessage.message = 'Height is required';
     errorMessage.status = true;
-  } else if (!anythingNotSpaces(cardholder)) {
-    errorMessage.message = 'Cardholder can not be empty';
+  } else if (height <= 0) {
+    errorMessage.message = 'Height is must be a positive number';
     errorMessage.status = true;
-  } else if (!cardHolderNameFormat(cardholder)) {
-    errorMessage.message = 'Cardholder Name must be correct format';
+  }
+  return errorMessage;
+};
+
+export const ValidateWeight = (weight) => {
+  const errorMessage = { message: 'Message', status: null };
+  if (isRequired(weight)) {
+    errorMessage.message = 'Weight is required';
+    errorMessage.status = true;
+  } else if (weight <= 0) {
+    errorMessage.message = 'Weight is must be a positive number';
     errorMessage.status = true;
   }
   return errorMessage;

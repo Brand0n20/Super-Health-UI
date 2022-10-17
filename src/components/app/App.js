@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import PatientsPage from '../patients/PatientsPage';
 import CreatePatient from '../patients/CreatePatient';
 import Header from '../header/Header';
+import PatientDetails from '../patients/PatientDetails';
 
 /**
  * @name App
@@ -18,6 +19,7 @@ const App = () => (
         <Routes>
           <Route exact path="/patients" element={<PatientsPage />} />
           <Route exact path="/patients/create" element={<CreatePatient />} />
+          <Route exact path="/patients/:id" element={<PatientDetails />} />
         </Routes>
       </div>
     </div>

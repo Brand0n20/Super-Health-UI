@@ -19,9 +19,14 @@ const FormItemDropdown = ({
               className={isError ? styles.errorOutline : styles.input}
               id={id}
               onChange={onChange}
-              defaultValue={value}
               value={value}
             >
+              <option
+                value={0}
+                key={0}
+              >
+                Select One
+              </option>
               {options.map((optionText) => (
                 <option
                   value={optionText}
@@ -47,8 +52,13 @@ const FormItemDropdown = ({
             id={id}
             onChange={onChange}
             value={value}
-            defaultValue={value}
           >
+            <option
+              value={0}
+              key={0}
+            >
+              Select One
+            </option>
             {options.map((optionText) => (
               <option
                 value={optionText}

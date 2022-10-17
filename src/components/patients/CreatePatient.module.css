@@ -22,5 +22,13 @@
     padding-left: 15px;
 }
 
-
+.goBack {
+     margin-top: 1px;
+     margin-right: 5px;
+     position:relative;
+     display: block;
+     float: left;
+     margin-bottom: 10px;
+     align-self: center;
+}
 
