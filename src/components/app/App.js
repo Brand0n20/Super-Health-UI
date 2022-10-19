@@ -5,6 +5,8 @@ import PatientsPage from '../patients/PatientsPage';
 import CreatePatient from '../patients/CreatePatient';
 import Header from '../header/Header';
 import PatientDetails from '../patients/PatientDetails';
+import EncounterDetails from '../patients/EncounterDetails';
+import CreateEncounter from '../patients/CreateEncounter';
 
 /**
  * @name App
@@ -20,6 +22,8 @@ const App = () => (
           <Route exact path="/patients" element={<PatientsPage />} />
           <Route exact path="/patients/create" element={<CreatePatient />} />
           <Route exact path="/patients/:id" element={<PatientDetails />} />
+          <Route exact path="/patients/:id/encounters/:encounterId" element={<EncounterDetails />} />
+          <Route exact path="/patients/:id/encounters/create" element={<CreateEncounter />} />
         </Routes>
       </div>
     </div>

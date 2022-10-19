@@ -231,7 +231,7 @@ const CreatePatient = () => {
             errorMessage={errorMessages.state}
             isError={errorMessages.stateIsError}
           />
-          <Button type="button" form="submit" onClick={handleCreate}>Update</Button>
+          <Button type="button" form="submit" onClick={handleCreate}>Submit</Button>
         </form>
       </div>
     </div>

@@ -37,6 +37,16 @@ const isValidSocialSecurityNumber = (property) => /^(?!219-09-9999|078-05-1120)(
 
 const isValidEmail = (property) => /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(property);
 
+const isValidICD10 = (property) => /^[A-Z]{1}\d{2}$/.test(property);
+
+const isValidVisitCode = (property) => /^[A-Z]{1}\d{1}[A-Z]{1} \d{1}[A-Z]{1}\d{1}$/.test(property);
+
+const isValidBillingCode = (property) => /^\d{3}.\d{3}.\d{3}-\d{2}$/.test(property);
+
+const isWholeNumber = (property) => /^\d+$/.test(property);
+
+const isValidDate = (property) => /^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/.test(property);
+
 /**
  * @name ValidateFirstName
  * @description - Validates a First Name input for:
@@ -272,6 +282,9 @@ export const ValidateGender = (gender) => {
   if (isRequired(gender)) {
     errorMessage.message = 'Must select either Male, Female, or Other';
     errorMessage.status = true;
+  } else if (!gender || gender === '0') {
+    errorMessage.message = 'Must select either Male, Female, or Other';
+    errorMessage.status = true;
   }
   return errorMessage;
 };
@@ -307,6 +320,134 @@ export const ValidateWeight = (weight) => {
     errorMessage.status = true;
   } else if (weight <= 0) {
     errorMessage.message = 'Weight is must be a positive number';
+    errorMessage.status = true;
+  }
+  return errorMessage;
+};
+
+export const ValidateNotes = (visitCode) => {
+  const errorMessage = { message: 'Message', status: null };
+  if (isRequired(visitCode)) {
+    errorMessage.message = 'Visit Code is required';
+    errorMessage.status = true;
+  } else if (!anythingNotSpaces(visitCode)) {
+    errorMessage.message = 'Visit Code is required';
+    errorMessage.status = true;
+  }
+};
+
+export const ValidateProvider = (provider) => {
+  const errorMessage = { message: 'Message', status: null };
+  if (isRequired(provider)) {
+    errorMessage.message = 'Provider is required';
+    errorMessage.status = true;
+  } else if (!anythingNotSpaces(provider)) {
+    errorMessage.message = 'Provider is required';
+    errorMessage.status = true;
+  }
+  return errorMessage;
+};
+
+export const ValidateTotalCost = (totalCost) => {
+  const errorMessage = { message: 'Message', status: null };
+  if (isRequired(totalCost)) {
+    errorMessage.message = 'Total is required';
+    errorMessage.status = true;
+  } else if (totalCost <= 0) {
+    errorMessage.message = 'Total cost must be a positive number';
+    errorMessage.status = true;
+  }
+  return errorMessage;
+};
+
+export const ValidateCopay = (copay) => {
+  const errorMessage = { message: 'Message', status: null };
+  if (isRequired(copay)) {
+    errorMessage.message = 'Copay is required';
+    errorMessage.status = true;
+  } else if (copay <= 0) {
+    errorMessage.message = 'Copay must be a positive number';
+    errorMessage.status = true;
+  }
+  return errorMessage;
+};
+
+export const ValidateIcd10 = (icd10) => {
+  const errorMessage = { message: 'Message', status: null };
+  if (isRequired(icd10)) {
+    errorMessage.message = 'Icd10 is required';
+    errorMessage.status = true;
+  } else if (!anythingNotSpaces(icd10)) {
+    errorMessage.message = 'Icd10 is required';
+    errorMessage.status = true;
+  } else if (!isValidICD10(icd10)) {
+    errorMessage.message = 'Icd10 must be of format LDD(ex. A12)';
+    errorMessage.status = true;
+  }
+  return errorMessage;
+};
+
+export const ValidateVisitCode = (visitCode) => {
+  const errorMessage = { message: 'Message', status: null };
+  if (isRequired(visitCode)) {
+    errorMessage.message = 'Visit Code is required';
+    errorMessage.status = true;
+  } else if (!anythingNotSpaces(visitCode)) {
+    errorMessage.message = 'Visit Code is required';
+    errorMessage.status = true;
+  } else if (!isValidVisitCode(visitCode)) {
+    errorMessage.message = 'Visit Code must be of format LDL DLD(ex. A1S 2D3)';
+    errorMessage.status = true;
+  }
+  return errorMessage;
+};
+
+export const ValidateBillingCode = (billingCode) => {
+  const errorMessage = { message: 'Message', status: null };
+  if (isRequired(billingCode)) {
+    errorMessage.message = 'Billing Code is required';
+    errorMessage.status = true;
+  } else if (!anythingNotSpaces(billingCode)) {
+    errorMessage.message = 'Billing Code is required';
+    errorMessage.status = true;
+  } else if (!isValidBillingCode(billingCode)) {
+    errorMessage.message = 'Billing Code must be of format xxx.xxx.xxx-xx(ex. 123.456.789-12)';
+    errorMessage.status = true;
+  }
+  return errorMessage;
+};
+
+export const ValidateChiefComplaint = (chiefComplaint) => {
+  const errorMessage = { message: 'Message', status: null };
+  if (isRequired(chiefComplaint)) {
+    errorMessage.message = 'Chieft complaint is required';
+    errorMessage.status = true;
+  } else if (!anythingNotSpaces(chiefComplaint)) {
+    errorMessage.message = 'Chieft complaint is required';
+    errorMessage.status = true;
+  }
+  return errorMessage;
+};
+
+export const ValidateNumber = (number) => {
+  const errorMessage = { message: 'Message', status: null };
+  if (!isRequired(number) && number <= 0) {
+    errorMessage.message = 'Number must be a whole positive number';
+    errorMessage.status = true;
+  } else if (!isRequired(number) && !isWholeNumber(number)) {
+    errorMessage.message = 'Number must be a whole positive number';
+    errorMessage.status = true;
+  }
+  return errorMessage;
+};
+
+export const ValidateDate = (date) => {
+  const errorMessage = { message: 'Message', status: null };
+  if (isRequired(date)) {
+    errorMessage.message = 'Date is required';
+    errorMessage.status = true;
+  } else if (!isValidDate(date)) {
+    errorMessage.message = 'Date must be in the format YYYY-MM-DD(ex. 2020-01-01)';
     errorMessage.status = true;
   }
   return errorMessage;

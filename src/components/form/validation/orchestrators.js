@@ -1,7 +1,10 @@
 import {
   ValidateFirstName, ValidateLastName, ValidateStreet, ValidateSocial,
   ValidateCity, ValidateState, ValidateZip, ValidateEmail,
-  ValidateGender, ValidateInsurance, ValidateAge, ValidateHeight, ValidateWeight
+  ValidateGender, ValidateInsurance, ValidateAge,
+  ValidateHeight, ValidateWeight, ValidateProvider,
+  ValidateTotalCost, ValidateIcd10, ValidateVisitCode,
+  ValidateBillingCode, ValidateCopay, ValidateChiefComplaint, ValidateNumber, ValidateDate
 } from './helpers';
 
 /**
@@ -39,6 +42,54 @@ export const errorsObjectIsNullOrEmpty = () => Object.values(errorMessagesObject
   }
   return false;
 });
+
+export const ValidateEncounter = (encounter) => {
+  let errors = {};
+  clearErrorsObject();
+  errors = ValidateProvider(encounter.provider);
+  errorMessagesObject.provider = errors.message;
+  errorMessagesObject.providerIsError = errors.status;
+
+  errors = ValidateTotalCost(encounter.totalCost);
+  errorMessagesObject.totalCost = errors.message;
+  errorMessagesObject.totalCostIsError = errors.status;
+
+  errors = ValidateCopay(encounter.copay);
+  errorMessagesObject.copay = errors.message;
+  errorMessagesObject.copayIsError = errors.status;
+
+  errors = ValidateIcd10(encounter.icd10);
+  errorMessagesObject.icd10 = errors.message;
+  errorMessagesObject.icd10IsError = errors.status;
+
+  errors = ValidateVisitCode(encounter.visitCode);
+  errorMessagesObject.visitCode = errors.message;
+  errorMessagesObject.visitCodeIsError = errors.status;
+
+  errors = ValidateBillingCode(encounter.billingCode);
+  errorMessagesObject.billingCode = errors.message;
+  errorMessagesObject.billingCodeIsError = errors.status;
+
+  errors = ValidateChiefComplaint(encounter.chiefComplaint);
+  errorMessagesObject.chiefComplaint = errors.message;
+  errorMessagesObject.chiefComplaintIsError = errors.status;
+
+  errors = ValidateNumber(encounter.pulse);
+  errorMessagesObject.pulse = errors.message;
+  errorMessagesObject.pulseIsError = errors.status;
+
+  errors = ValidateNumber(encounter.systolic);
+  errorMessagesObject.systolic = errors.message;
+  errorMessagesObject.systolicIsError = errors.status;
+
+  errors = ValidateNumber(encounter.diastolic);
+  errorMessagesObject.diastolic = errors.message;
+  errorMessagesObject.diastolicIsError = errors.status;
+
+  errors = ValidateDate(encounter.date);
+  errorMessagesObject.date = errors.message;
+  errorMessagesObject.dateIsError = errors.status;
+};
 
 export const ValidatePatient = (patient) => {
   let errors = {};

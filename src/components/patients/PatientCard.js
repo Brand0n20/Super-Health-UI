@@ -20,7 +20,7 @@ const PatientCard = ({ patient }) => {
         <li>
           {patient.gender}
         </li>
-        <Button onClick={() => navigate(`/patients/${patient.id}`)}>Patient Details</Button>
+        <Button className="btn btn-secondary" onClick={() => navigate(`/patients/${patient.id}`)}>Patient Details</Button>
       </div>
     </div>
   );
