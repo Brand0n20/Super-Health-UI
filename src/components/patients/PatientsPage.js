@@ -10,10 +10,19 @@ const PatientsPage = () => {
   const [apiError, setApiError] = useState();
   const [patients, setPatients] = useState([]);
   const navigate = useNavigate();
+  const [patientToDelete, setPatientToDelete] = useState(false);
+
+  const onDelete = (patientState) => {
+    if (patientToDelete === patientState) {
+      setPatientToDelete(!patientState);
+    } else {
+      setPatientToDelete(patientState);
+    }
+  };
 
   useEffect(() => {
     fetchPatients(setPatients, setApiError);
-  }, []);
+  }, [patientToDelete]);
 
   return (
     <div className={styles.container}>
@@ -28,7 +37,7 @@ const PatientsPage = () => {
       </div>
       {patients.map((patient) => (
         <div key={patient.id} className={styles.patients}>
-          <PatientCard patient={patient} />
+          <PatientCard patient={patient} onDelete={onDelete} />
         </div>
       ))}
     </div>

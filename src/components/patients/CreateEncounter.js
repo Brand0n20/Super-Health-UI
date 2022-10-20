@@ -36,7 +36,7 @@ const EncounterDetails = () => {
   };
 
   const changePage = () => {
-    navigate(`patients/${id}`);
+    navigate(`/patients/${id}`);
   };
 
   const handleCreate = async () => {
@@ -59,7 +59,7 @@ const EncounterDetails = () => {
           {Constants.API_ERROR}
         </p>
         )}
-        <h1>Encounter Details</h1>
+        <h1>Create Encounter</h1>
         <div className={styles.container}>
           <form className={styles.form}>
             <div className="form-row">

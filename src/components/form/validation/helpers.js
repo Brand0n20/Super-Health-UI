@@ -325,17 +325,6 @@ export const ValidateWeight = (weight) => {
   return errorMessage;
 };
 
-export const ValidateNotes = (visitCode) => {
-  const errorMessage = { message: 'Message', status: null };
-  if (isRequired(visitCode)) {
-    errorMessage.message = 'Visit Code is required';
-    errorMessage.status = true;
-  } else if (!anythingNotSpaces(visitCode)) {
-    errorMessage.message = 'Visit Code is required';
-    errorMessage.status = true;
-  }
-};
-
 export const ValidateProvider = (provider) => {
   const errorMessage = { message: 'Message', status: null };
   if (isRequired(provider)) {

@@ -41,6 +41,16 @@ export const postEncounter = async (patientId, encounterData, setApiError) => {
     }).catch(() => setApiError);
 };
 
+export const updateEncounter = async (patientId, encounterId, encounterData, setApiError) => {
+  await HttpHelper(`${Constants.PATIENTS_ENDPOINT}/${patientId}/encounters/${encounterId}`, 'PUT', encounterData)
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error(Constants.API_ERROR);
+    }).catch(() => setApiError);
+};
+
 export const fetchPatientById = async (patientId, setPatient, setApiError) => {
   await HttpHelper(`${Constants.PATIENTS_ENDPOINT}/${patientId}`, 'GET')
     .then((response) => {
@@ -67,5 +77,15 @@ export const updatePatient = async (patientId, patientData, setApiError) => {
       if (response.ok) {
         setApiError(false);
       }
+    }).catch(() => setApiError(true));
+};
+
+export const deletePatient = async (patientId, patient, setApiError) => {
+  await HttpHelper(`${Constants.PATIENTS_ENDPOINT}/${patientId}`, 'DELETE', patient)
+    .then((response) => {
+      if (response.ok) {
+        return response;
+      }
+      throw new Error(Constants.API_ERROR);
     }).catch(() => setApiError(true));
 };

@@ -29,3 +29,15 @@ li {
 .container {
     padding-left: 20px;
 }
+
+.buttonSection {
+    margin-left: 15px;
+    background-color: rgb(201, 36, 36);
+    border-color:rgb(201, 36, 36) ;
+}
+
+.buttonSection:hover {
+    margin-left: 15px;
+    background-color: rgb(172, 34, 34);
+    border-color:rgb(198, 56, 56) ;
+}

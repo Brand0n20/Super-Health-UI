@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
-import { fetchEncounterById } from './PatientService';
+import { fetchEncounterById, updateEncounter } from './PatientService';
 import styles from './CreatePatient.module.css';
 import Constants from '../../utils/constants';
 import FormItem from '../form/FormItem';
@@ -30,7 +30,7 @@ const EncounterDetails = () => {
     ValidateEncounter(encounterData);
     setErrorMessages(getErrorsObject());
     if (errorsObjectIsNullOrEmpty()) {
-      // await postEncounter(id, encounterData, setApiError);
+      await updateEncounter(id, encounterId, encounterData, setApiError);
       navigate(`/patients/${id}`);
     }
   };
