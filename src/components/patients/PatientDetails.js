@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
-import { fetchPatientById, updatePatient, fetchEncountersByPatientId } from './PatientService';
+import { fetchPatientById, updatePatient } from './PatientService';
+import { fetchEncountersByPatientId } from './EncounterService';
 import Constants from '../../utils/constants';
 import styles from './CreatePatient.module.css';
 import FormItem from '../form/FormItem';

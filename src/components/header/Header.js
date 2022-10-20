@@ -1,14 +1,15 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { Link, useMatch, useResolvedPath } from 'react-router-dom/dist';
+import { Link, useMatch, useResolvedPath } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
 import styles from './Header.module.css';
 
 const Header = () => (
-  <Nav className="navbar navbar-expand-lg navbar-light bg-light" data-au="nav-bar">
-    <ul className="navbar-brand">Hotel Bookings</ul>
+  <Nav className="navbar navbar-expand-lg navbar-light bg-light" data-testid="nav-bar">
+    <ul className="navbar-brand">Super Health Inc</ul>
     <ul className="nav-item">
       <CustomLink
+        data-testid="patients"
         to="/patients"
         className="nav-item nav-link"
       >

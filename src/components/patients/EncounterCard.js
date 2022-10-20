@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
-import { useNavigate } from 'react-router-dom/dist';
+import { useNavigate } from 'react-router-dom';
 import styles from './Encounters.module.css';
 
 const EncounterCard = ({ encounter, patientData }) => {

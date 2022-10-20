@@ -7,7 +7,7 @@ import FormItem from '../form/FormItem';
 import {
   getErrorsObject, errorsObjectIsNullOrEmpty, ValidateEncounter
 } from '../form/validation/orchestrators';
-import { postEncounter } from './PatientService';
+import { postEncounter } from './EncounterService';
 
 const EncounterDetails = () => {
   const [apiError, setApiError] = useState();

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
-import { useNavigate } from 'react-router-dom/dist';
+import { useNavigate } from 'react-router-dom';
 import Constants from '../../utils/constants';
 import styles from './CreatePatient.module.css';
 import FormItem from '../form/FormItem';

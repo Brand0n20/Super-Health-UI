@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
-import { useNavigate } from 'react-router-dom/dist';
+import { useNavigate } from 'react-router-dom';
 import { fetchPatients } from './PatientService';
 import styles from './Patients.module.css';
 import Constants from '../../utils/constants';
