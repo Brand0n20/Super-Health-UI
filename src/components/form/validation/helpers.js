@@ -294,8 +294,8 @@ export const ValidateAge = (age) => {
   if (isRequired(age)) {
     errorMessage.message = 'Age is required';
     errorMessage.status = true;
-  } else if (age <= 0) {
-    errorMessage.message = 'Age is must be a positive number';
+  } else if (!isWholeNumber(age)) {
+    errorMessage.message = 'Age must be a positive whole number';
     errorMessage.status = true;
   }
   return errorMessage;
@@ -306,8 +306,8 @@ export const ValidateHeight = (height) => {
   if (isRequired(height)) {
     errorMessage.message = 'Height is required';
     errorMessage.status = true;
-  } else if (height <= 0) {
-    errorMessage.message = 'Height is must be a positive number';
+  } else if (!isWholeNumber(height)) {
+    errorMessage.message = 'Height must be a positive whole number';
     errorMessage.status = true;
   }
   return errorMessage;
@@ -318,8 +318,8 @@ export const ValidateWeight = (weight) => {
   if (isRequired(weight)) {
     errorMessage.message = 'Weight is required';
     errorMessage.status = true;
-  } else if (weight <= 0) {
-    errorMessage.message = 'Weight is must be a positive number';
+  } else if (!isWholeNumber(weight)) {
+    errorMessage.message = 'Weight must be a positive whole number';
     errorMessage.status = true;
   }
   return errorMessage;

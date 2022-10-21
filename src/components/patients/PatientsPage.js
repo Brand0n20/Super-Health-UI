@@ -6,6 +6,10 @@ import styles from './Patients.module.css';
 import Constants from '../../utils/constants';
 import PatientCard from './PatientCard';
 
+/**
+ * A page where the patient cards will be displayed
+ * @returns Patient Cards and a button to add a new patient
+ */
 const PatientsPage = () => {
   const [apiError, setApiError] = useState();
   const [patients, setPatients] = useState([]);
@@ -37,7 +41,7 @@ const PatientsPage = () => {
       </div>
       {patients.map((patient) => (
         <div key={patient.id} className={styles.patients}>
-          <PatientCard patient={patient} onDelete={onDelete} />
+          <PatientCard data-testid="patient" patient={patient} onDelete={onDelete} />
         </div>
       ))}
     </div>

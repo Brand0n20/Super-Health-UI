@@ -26,7 +26,7 @@ const PatientCard = ({ patient, onDelete }) => {
       <div className="rounded border border-primary d-inline-flex p-2 mt-md-4">
         <div className={styles.content}>
           <h4>Patient</h4>
-          <li>
+          <li data-testid="firstName">
             {patient.firstName}
             {' '}
             {patient.lastName}

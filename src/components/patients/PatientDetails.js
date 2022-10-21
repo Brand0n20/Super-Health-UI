@@ -154,7 +154,7 @@ const PatientDetails = () => {
                 <div className="form-group col-md 6">
                   <h5>Age: </h5>
                   <FormItem
-                    type="number"
+                    type="text"
                     id="age"
                     value={patientData.age || ''}
                     onChange={onPatientDataChange}
@@ -169,7 +169,7 @@ const PatientDetails = () => {
                 <div className="form-group col-md 6">
                   <h5>Height: </h5>
                   <FormItem
-                    type="number"
+                    type="text"
                     id="height"
                     value={patientData.height || ''}
                     onChange={onPatientDataChange}
@@ -180,7 +180,7 @@ const PatientDetails = () => {
                 <div className="form-group col-md 6">
                   <h5>Weight: </h5>
                   <FormItem
-                    type="number"
+                    type="text"
                     id="weight"
                     value={patientData.weight || ''}
                     onChange={onPatientDataChange}

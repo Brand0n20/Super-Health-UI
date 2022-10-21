@@ -13,7 +13,6 @@ import CreateEncounter from '../patients/CreateEncounter';
  * @returns component
  */
 const App = () => (
-
   <BrowserRouter>
     <Header />
     <div className="page-container">
