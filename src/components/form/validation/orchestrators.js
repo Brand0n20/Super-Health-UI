@@ -9,14 +9,12 @@ import {
 
 /**
  * @name errorMessagesObject
- * @author - Andrew Salerno
  * @description - The object used to hold error messages during validation
  */
 let errorMessagesObject = {};
 
 /**
  * @name getErrorsObject
- * @author - Andrew Salerno
  * @description - Returns an object of validated form errors to a form builder
  * @returns - An object of form errors containting a message and an error status
  */
@@ -24,7 +22,6 @@ export const getErrorsObject = () => errorMessagesObject;
 
 /**
  * @name clearErrorsObject
- * @author - Andrew Salerno
  * @description - Clears the errorMessagesObject of form errors
  */
 export const clearErrorsObject = () => { errorMessagesObject = {}; };

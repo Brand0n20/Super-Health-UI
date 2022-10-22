@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import React from 'react';
 import styles from './FormItem.module.css';
 
@@ -125,14 +124,14 @@ const TextAreaWithError = ({
 );
 
 /**
- * @author Kevin Davis, Franc Laghom
  * @name FormItem
  * @description Input field
  * @return component
  */
 
 const FormItem = ({
-  onChange, value, id, label, placeholder, type, errorMessage, isError, prefix, maxLength, paddingLeft, rows
+  onChange, value, id, label, placeholder, type, errorMessage,
+  isError, prefix, maxLength, paddingLeft, rows
 }) => {
   const errorStyles = isError ? styles.errorOutline : styles.input;
   const prefixError = prefix ? `${styles['prefix-error']}` : '';
