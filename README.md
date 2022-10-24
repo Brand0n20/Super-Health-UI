@@ -1,7 +1,7 @@
 # Super Health Inc.
 
 This is a starter project for Super Health Inc. that was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-Thiis application serves as a service for a hospital/clinic where it is supposed to keep track of its patients and their encounters/visits with our doctors. The application allows for the user to edit, add, and delete a patient. Although, a patient may only be deleted if they had no encounters linked to them. You can also add and edit encounters once you're in a specific patient's details page.
+This application serves as a service for a hospital/clinic where it is supposed to keep track of its patients and their encounters/visits with our doctors. The application allows for the user to edit, add, and delete a patient. Although, a patient may only be deleted if they had no encounters linked to them. You can also add and edit encounters once you're in a specific patient's details page.
 
 ## Install Prerequisites
 
@@ -43,5 +43,5 @@ You will also see any lint errors in the console.
 * To validate all JS code and auto-format some easily reparable mistakes, run the linter: npm run lint. This is how you lint
 * It's used to check sysntax and find problems and it uses commonJS modules
 * The project is using Eslint-config-airbnb version 18.2.1.
-* If Eslint-config is not on the cloned down project, run "npx install enlist-config-airbnb
+* If Eslint-config is not on the cloned down project, run "npm install eslint-config-airbnb —-save-dev"
 * In the .eslinrc file, make sure it extends ""airbnb" and "airbnb/hooks"
