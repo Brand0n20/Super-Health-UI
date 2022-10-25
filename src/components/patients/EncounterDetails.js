@@ -46,7 +46,7 @@ const EncounterDetails = () => {
           {Constants.API_ERROR}
         </p>
         )}
-        <h1>Encounter Details</h1>
+        <Button onClick={() => navigate(`/patients/${id}`)} className={styles.goBack}>Go back to Patient Details Page</Button>
         <div className={styles.container}>
           <form className={styles.form}>
             <h6 className={styles.id}>
@@ -170,7 +170,7 @@ const EncounterDetails = () => {
                   />
                 </div>
                 <div className="form-group col-md 6">
-                  <h5>Systolic: </h5>
+                  <h5>Systolic Pressure: </h5>
                   <FormItem
                     type="text"
                     id="systolic"

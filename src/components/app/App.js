@@ -7,6 +7,7 @@ import Header from '../header/Header';
 import PatientDetails from '../patients/PatientDetails';
 import EncounterDetails from '../patients/EncounterDetails';
 import CreateEncounter from '../patients/CreateEncounter';
+import HomePage from '../home-page/HomePage';
 
 /**
  * @name App
@@ -18,6 +19,7 @@ const App = () => (
     <div className="page-container">
       <div className="content-wrap">
         <Routes>
+          <Route exact path="/" element={<HomePage />} />
           <Route exact path="/patients" element={<PatientsPage />} />
           <Route exact path="/patients/create" element={<CreatePatient />} />
           <Route exact path="/patients/:id" element={<PatientDetails />} />

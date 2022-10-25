@@ -60,6 +60,11 @@ const PatientDetails = () => {
         <Button onClick={() => navigate('/patients')} className={styles.goBack}>Go back to Patients Page</Button>
         <div className={styles.container}>
           <form className={styles.form}>
+            <h6 className={styles.id}>
+              Patient ID:
+              {' '}
+              {patientData.id}
+            </h6>
             <div className="form-row">
               <div className="input-group">
                 <div className="form-group col-md 6">
@@ -171,6 +176,7 @@ const PatientDetails = () => {
                   <FormItem
                     type="text"
                     id="height"
+                    placeholder="in inches"
                     value={patientData.height || ''}
                     onChange={onPatientDataChange}
                     errorMessage={errorMessages.height}
@@ -182,6 +188,7 @@ const PatientDetails = () => {
                   <FormItem
                     type="text"
                     id="weight"
+                    placeholder="lbs"
                     value={patientData.weight || ''}
                     onChange={onPatientDataChange}
                     errorMessage={errorMessages.weight}

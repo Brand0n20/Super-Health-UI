@@ -177,6 +177,7 @@ const CreatePatient = () => {
                 <FormItem
                   type="text"
                   id="height"
+                  placeholder="Inches"
                   value={patientData.height || ''}
                   onChange={onPatientDataChange}
                   errorMessage={errorMessages.height}
@@ -188,6 +189,7 @@ const CreatePatient = () => {
                 <FormItem
                   type="text"
                   id="weight"
+                  placeholder="lbs"
                   value={patientData.weight || ''}
                   onChange={onPatientDataChange}
                   errorMessage={errorMessages.weight}
