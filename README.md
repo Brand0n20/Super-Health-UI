@@ -1,7 +1,7 @@
 # Super Health Inc.
 
 This is a starter project for Super Health Inc. that was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-This application serves as a service for a hospital/clinic where it is supposed to keep track of its patients and their encounters/visits with our doctors. The application allows for the user to edit, add, and delete a patient. Although, a patient may only be deleted if they had no encounters linked to them. You can also add and edit encounters once you're in a specific patient's details page.
+This application serves as a service for a hospital/clinic where it is supposed to keep track of its patients and their encounters/visits with our doctors. The application allows for the clinic employee to edit, add, and delete a patient. Although, a patient may only be deleted if they had no encounters linked to them. You can also add and edit encounters once you're in a specific patient's details page.
 
 ## Install Prerequisites
 
